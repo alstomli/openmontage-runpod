@@ -1,0 +1,9 @@
+Manual visual review: caption and subtitle checks PASS for the supplied-media technical prototype.
+Reviewer: coordinator, after inspecting extracted video frames at 5, 15, and 25 seconds.
+Version: wrapper 0.1.1, pinned upstream d21f5d4eaa08422b09c7091757a05affcbabb35b.
+Caption phrases stay inside the image after the SRT/libass fix; all scene subtitle fields are visible.
+Known cosmetic limitation: the upstream animated hero_title can wrap within words; the first sample splits 'finished' across lines. General creative/layout quality is not certified by these checks.
+Metadata: 30.059 seconds, 1280x720, 30fps H.264 with AAC audio, 1,835,627 bytes.
+SHA256: e32bd13e7fa0a2aa4a1e5ba52d1f1c2429b726d5b9d49392b7138ea01f18d611.
+Source speech: offline Windows Zira fixture, not a worker synthesis backend. Caption phrases are manually timed, not word-aligned.
+Long-render provenance: existing full media image with frozen 0.1.1 application mounted. Final archive-built image separately passed 28 unit tests, 22 reliability tests, and an uncached offline four-second render without source mounts.

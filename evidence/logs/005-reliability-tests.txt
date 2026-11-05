@@ -13,11 +13,11 @@ test_replacement_worker_replays_durable_receipt (test_recovery.RecoveryTests.tes
 test_traversal_and_cross_project_assets_rejected (test_recovery.RecoveryTests.test_traversal_and_cross_project_assets_rejected) ... ok
 test_unexpected_exception_does_not_leak_secret_text (test_recovery.RecoveryTests.test_unexpected_exception_does_not_leak_secret_text) ... ok
 INFO   | sdk-failure-contract | Started.
+test_handler_failure_reaches_sdk_error_channel (test_recovery.RunpodSDKTests.test_handler_failure_reaches_sdk_error_channel) ... runner.py           :19   2026-11-05 03:55:29,109 {"code": "invalid_input", "event": "stage_failed"}
 DEBUG  | sdk-failure-contract | Handler output: {'status': 'failed', 'error': {'code': 'invalid_input', 'message': 'project_id must use lowercase letters, digits, _ or - (1–64 characters).'}}
 DEBUG  | sdk-failure-contract | run_job return: {'output': {'status': 'failed'}, 'error': {'code': 'invalid_input', 'message': 'project_id must use lowercase letters, digits, _ or - (1–64 characters).'}}
-test_handler_failure_reaches_sdk_error_channel (test_recovery.RunpodSDKTests.test_handler_failure_reaches_sdk_error_channel) ... runner.py           :19   2026-11-05 03:45:45,408 {"code": "invalid_input", "event": "stage_failed"}
-INFO   | sdk-success-contract | Started.
 ok
+INFO   | sdk-success-contract | Started.
 DEBUG  | sdk-success-contract | Handler output: {'status': 'awaiting_approval', 'artifact_hash': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
 DEBUG  | sdk-success-contract | run_job return: {'output': {'status': 'awaiting_approval', 'artifact_hash': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}
 test_sdk_preserves_success_and_ignores_provider_metadata (test_recovery.RunpodSDKTests.test_sdk_preserves_success_and_ignores_provider_metadata) ... ok
@@ -29,6 +29,6 @@ test_presigned_urls_are_regenerated_for_each_response (test_recovery.S3ContractT
 test_s3_body_is_closed_after_read (test_recovery.S3ContractTests.test_s3_body_is_closed_after_read) ... ok
 
 ----------------------------------------------------------------------
-Ran 22 tests in 2.289s
+Ran 22 tests in 2.346s
 
 OK

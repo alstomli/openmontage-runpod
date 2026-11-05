@@ -151,7 +151,10 @@ class Runner:
 
 
 def execute(job, runner=None):
-    """Stable local and Runpod response contract; never expose raw exceptions."""
+    """Stable application response contract; never expose raw exceptions.
+
+    The Runpod adapter encodes failed errors as platform-compatible strings.
+    """
     try:
         schema.require(isinstance(job, dict) and set(job) <= {"id", "input"} and "input" in job, "Job must contain an input object.")
         return (runner or Runner()).run(job["input"])

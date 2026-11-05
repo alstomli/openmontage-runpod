@@ -1,0 +1,2 @@
+Required Runpod network volume is not mounted; refusing ephemeral storage.
+PASS: required missing mount rejected

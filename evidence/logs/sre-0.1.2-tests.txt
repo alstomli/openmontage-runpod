@@ -1,0 +1,42 @@
+test_asset_mutation_after_approval_is_rejected (test_recovery.RecoveryTests.test_asset_mutation_after_approval_is_rejected) ... ok
+test_assets_require_exact_plan_approval (test_recovery.RecoveryTests.test_assets_require_exact_plan_approval) ... ok
+test_changed_plan_does_not_inherit_approval (test_recovery.RecoveryTests.test_changed_plan_does_not_inherit_approval) ... ok
+test_changed_request_cannot_reuse_idempotency_key (test_recovery.RecoveryTests.test_changed_request_cannot_reuse_idempotency_key) ... ok
+test_concurrent_worker_cannot_enter_locked_project (test_recovery.RecoveryTests.test_concurrent_worker_cannot_enter_locked_project) ... ok
+test_conflicting_hashes_for_one_input_key_are_rejected (test_recovery.RecoveryTests.test_conflicting_hashes_for_one_input_key_are_rejected) ... ok
+test_corrupt_cached_artifact_is_not_reported_intact (test_recovery.RecoveryTests.test_corrupt_cached_artifact_is_not_reported_intact) ... ok
+test_crash_leftover_lock_fails_closed (test_recovery.RecoveryTests.test_crash_leftover_lock_fails_closed) ... ok
+test_failed_media_stage_releases_lock_and_can_retry (test_recovery.RecoveryTests.test_failed_media_stage_releases_lock_and_can_retry) ... ok
+test_missing_cached_artifact_is_reconstructed (test_recovery.RecoveryTests.test_missing_cached_artifact_is_reconstructed) ... ok
+test_object_and_array_enum_inputs_are_validation_errors (test_recovery.RecoveryTests.test_object_and_array_enum_inputs_are_validation_errors) ... ok
+test_replacement_worker_replays_durable_receipt (test_recovery.RecoveryTests.test_replacement_worker_replays_durable_receipt) ... ok
+test_traversal_and_cross_project_assets_rejected (test_recovery.RecoveryTests.test_traversal_and_cross_project_assets_rejected) ... ok
+test_unexpected_exception_does_not_leak_secret_text (test_recovery.RecoveryTests.test_unexpected_exception_does_not_leak_secret_text) ... ok
+INFO   | sdk-report-contract | Started.
+test_failure_string_survives_complete_sdk_reporting_serialization (test_recovery.RunpodSDKTests.test_failure_string_survives_complete_sdk_reporting_serialization) ... runner.py           :19   2026-11-05 04:30:32,004 {"code": "invalid_input", "event": "stage_failed"}
+DEBUG  | sdk-report-contract | Handler output: {'status': 'failed', 'error': '{"code": "invalid_input", "message": "Unknown operation."}'}
+DEBUG  | sdk-report-contract | run_job return: {'output': {'status': 'failed'}, 'error': '{"code": "invalid_input", "message": "Unknown operation."}'}
+DEBUG  | sdk-report-contract | rp_debugger | Flag not set, skipping debugger output.
+DEBUG  | sdk-report-contract | Results sent.
+INFO   | sdk-report-contract | Finished.
+ok
+INFO   | sdk-failure-contract | Started.
+DEBUG  | sdk-failure-contract | Handler output: {'status': 'failed', 'error': '{"code": "invalid_input", "message": "Unknown operation."}'}
+test_handler_failure_reaches_sdk_error_channel (test_recovery.RunpodSDKTests.test_handler_failure_reaches_sdk_error_channel) ... runner.py           :19   2026-11-05 04:30:32,009 {"code": "invalid_input", "event": "stage_failed"}
+DEBUG  | sdk-failure-contract | run_job return: {'output': {'status': 'failed'}, 'error': '{"code": "invalid_input", "message": "Unknown operation."}'}
+ok
+INFO   | sdk-success-contract | Started.
+DEBUG  | sdk-success-contract | Handler output: {'status': 'awaiting_approval', 'artifact_hash': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+DEBUG  | sdk-success-contract | run_job return: {'output': {'status': 'awaiting_approval', 'artifact_hash': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}
+test_sdk_preserves_success_and_ignores_provider_metadata (test_recovery.RunpodSDKTests.test_sdk_preserves_success_and_ignores_provider_metadata) ... ok
+test_installed_sdk_can_encode_conditional_object_creation (test_recovery.S3ContractTests.test_installed_sdk_can_encode_conditional_object_creation) ... ok
+test_lock_conflict_does_not_overwrite_existing_owner (test_recovery.S3ContractTests.test_lock_conflict_does_not_overwrite_existing_owner) ... ok
+test_lock_create_uses_atomic_conditional_put (test_recovery.S3ContractTests.test_lock_create_uses_atomic_conditional_put) ... ok
+test_missing_s3_object_has_stable_error (test_recovery.S3ContractTests.test_missing_s3_object_has_stable_error) ... ok
+test_presigned_urls_are_regenerated_for_each_response (test_recovery.S3ContractTests.test_presigned_urls_are_regenerated_for_each_response) ... ok
+test_s3_body_is_closed_after_read (test_recovery.S3ContractTests.test_s3_body_is_closed_after_read) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 2.261s
+
+OK

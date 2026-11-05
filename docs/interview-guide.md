@@ -36,7 +36,7 @@ The initial supplied-asset image performs CPU/browser rendering and does not cla
 
 ### Why is external storage necessary?
 
-Worker-local disk can disappear when a worker stops. We persist plan/version metadata, staged media and final outputs independently. Local filesystem storage is a development adapter; S3-compatible storage provides the cloud durability boundary.
+Worker-container disk can disappear when a worker stops. Our actual Runpod deployment uses `LocalStore` against the persistent mounted network volume at `/runpod-volume/openmontage`, with a startup mount guard. Runpod's regional S3 API transfers files externally; it is not the worker's storage backend. We observed different workers consuming persisted plans/assets and downloaded all five outputs with verified hashes. The optional generic S3 adapter is a separate unverified provider profile.
 
 ### How do approvals work?
 
@@ -72,6 +72,8 @@ It builds the Linux image, runs application tests and performs a supplied-asset 
 
 Publish the tested image under an immutable digest, prepare and review endpoint/storage settings, deploy to staging, run one async smoke production and inspect its durable output. Restore the previous verified image/configuration for rollback and smoke test again. Mark rollback "planned" until demonstrated.
 
+For this account, the already authorized GitHub connection can build the selected implementation branch directly from its Dockerfile, so an initial GHCR push is optional. Docker fetches upstream from a fixed checksum-verified archive and does not rely on the cloud builder initializing submodules. Record the resulting Runpod build/image identity as well as the source commit.
+
 ### How do you choose timeouts and concurrency?
 
 Start conservatively with one job per worker and one worker. Measure cold start, stage duration and peak memory; choose explicit ceilings with queue headroom. Increasing Remotion concurrency can improve speed but also increase memory use. Initial limits are proposals, not measured SLOs.
@@ -88,11 +90,17 @@ The assistant's sandbox could not resolve GitHub for the first clone and could n
 
 The real 30-second fixture produced a valid MP4, but a screenshot showed a long phrase caption clipped. Our initial adapter supplied a whole phrase as one "word" to upstream's nowrap word-caption layout. Media probing verified encoding, not readable typography. The correct response was to stop release acceptance, fix caption rendering and repeat visual tests, not to treat passing ffprobe as success. Cite the final corrected evidence when available.
 
-The implemented correction in wrapper 0.1.1 keeps Remotion for composition and uses an FFmpeg/libass pass for wrapped literal SRT phrases, preserving supplied timings. It also maps subtitle scenes to a supported upstream type. This introduces a second encode and needs its own timing and visual test; implementation alone is not proof of acceptance.
+The correction in wrapper 0.1.1 keeps Remotion for composition and uses an FFmpeg/libass pass for wrapped literal SRT phrases, preserving supplied timings. It maps subtitle scenes to a supported upstream type. The packaged four-second test passed, and a separate 30-second supplied-speech test was inspected at 5/15/25 seconds: captions fit and subtitles show. The latter used mounted frozen source, so it is not the same artifact proof as the packaged-image smoke. A remaining upstream title animation can wrap within a word. We call this a working technical prototype, not universally polished video output.
 
 ### Did the independent SRE review catch a defect?
 
 Yes. Repeated references to the same source key could initially specify conflicting hashes and slip through staging. The schema now rejects contradictory digests, with a regression test. This demonstrates why a second role verifies the contract rather than merely rerunning implementation-shaped tests.
+
+### What did live negative testing reveal after the video succeeded?
+
+0.1.1 produced a real cloud video, but an invalid-operation job returned outer `COMPLETED` and only `output.status: failed`; Runpod lost the dictionary error. Our previous SDK test stopped at intermediate extraction, so it missed the serialized platform payload. SRE added a full pinned-SDK wire-path test, and 0.1.2 serializes only sanitized `{code,message}` as a JSON string in the provider error channel. Local CLI errors remain dictionaries. After 31 unit and 23 reliability checks passed, actual 0.1.2 invalid input returned provider `FAILED` with the safe diagnostic, and a fresh normal prepare completed uncached with the expected plan hash. That is direct evidence that the corrected boundary works for both tested paths.
+
+This is why successful media, local exception handling and correct provider status are separate checks. It also explains why a focused transport correction need not repeat an expensive unchanged 30-second render; preserve the 0.1.1 video provenance and test the changed boundary directly.
 
 ### Can old output be reused after a new deployment?
 
@@ -101,6 +109,20 @@ Yes, intentionally: receipt lookup is request-based. A matching request key with
 ### How would you prove recovery?
 
 Run a stage, preserve storage, replace the worker/process, resubmit the same approved request and verify output hashes and completion metadata. Test a crash leaving a lock and follow the documented operator procedure. A mock-only storage test does not establish real S3 or media recovery.
+
+For the actual cloud record, first prepare used worker `ap64a5w4royb1u`; later asset approval/composition used `0lwirxhe7d9ph2` and consumed persisted artifacts. The same-request prepare replay returned cached output in 173 ms on the original worker. Explain those as two different observations: cross-job/worker persistence and same-worker cache reuse. Neither claims a hard-killed writer recovery test.
+
+### What did the real cloud run prove?
+
+It built from source, started the configured CPU worker with the mounted volume, completed prepare/approval/staging/approval/composition, and produced five durable artifacts. Independent download hashes matched all five. The 0.1.1 MP4 is 1,829,646 bytes, 30.059 seconds, H.264 1280×720 at 30 fps with AAC. Actual cloud frames at 5/15/25 seconds showed contained captions and subtitles; the cosmetic title-word wrap remains. The provider reported 138,890 ms execution and 4,285 ms delay, where delay includes queue/scheduling/startup rather than isolated cold start. That is one fixture result, not an SLO, throughput benchmark or cost-saving claim.
+
+### How did you transfer files without a Runpod API key?
+
+We submitted jobs through the authenticated Requests UI. The existing Runpod API key remained masked and unused. The user separately approved an S3 key for file transfer at action time; values stayed in ignored `.env`, passed explicitly with Docker `--env-file`. Runpod's key form granted all-volume S3 read/write, but our helper was restricted to the approved volume/project namespace and did not list/delete existing LLM files. The worker used filesystem access on the mounted volume, not the transfer key.
+
+### Why do the local and cloud MP4 hashes differ?
+
+The cloud image is built independently, and encoding/environment differences can change bytes even with the same source media. We verify each output against its own worker manifest and record wrapper/upstream/build identity, media properties and inspected frames. We do not claim byte-identical rebuilds or require the cloud MP4 to match the separate local output's SHA-256. The 0.1.2 handler fix leaves media code unchanged and retains the 0.1.1 cloud video's original provenance.
 
 ### What is the cost model?
 

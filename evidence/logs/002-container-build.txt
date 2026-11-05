@@ -1,11 +1,13 @@
-Container build: PASS
+Container build: PASS (application0.1.1)
 Command: docker build --platform linux/amd64 -t openmontage-worker:local --progress plain .
-Target: runtime (full packaged application, handler, scripts, unit and reliability suites).
-Final local image ID: sha256:f33bf954aaa6859bbbd7ce82dccd013f307029361a1619dc4b58f24180ad2c20
+Target: runtime, full packaged application/scripts/handler/tests; no submodule required in build context.
+Final local image ID: sha256:b8b0ca6c2f32910db67eda0232d9a262264760836728e2551bf19ae82b540806
 Upstream: d21f5d4eaa08422b09c7091757a05affcbabb35b
-Versions: Python3.11.11, Node22.14.0, FFmpeg5.1.9, Chromium156.0.8078.79, Remotion4.0.484.
-Full log: docker-worker-frozen-build.log
-Inventories inside image: /opt/upstream.json, /opt/system-packages.txt, /opt/python-packages.txt.
-Packaged tests: 24 unit PASS; 22 reliability/SDK PASS; no skips; network disabled; no source mounts.
-Reproducibility boundary: base image digests, upstream commit and npm lockfile pinned. apt and Python transitive versions resolve during builds and are inventoried; byte-identical rebuilds not claimed.
-No registry push or Runpod cloud deployment performed by these commands.
+Archive SHA256:27a1a709dfcdf58d98b2918cafe5acb88220cef933b718e2926d23cf7ccd160c; Docker checksum verified before safe tar extraction.
+Versions: Python3.11.11, Node22.14.0, FFmpeg5.1.9 (libass available), Chromium156.0.8078.79, Remotion4.0.484.
+Full log: docker-worker-archive-build.log
+Inventories: /opt/upstream.json, /opt/system-packages.txt, /opt/python-packages.txt.
+Packaged tests:28unit PASS,22reliability/SDK PASS, zero skips; network disabled and no source mounts.
+Network-volume startupguard: missing mount rejected; local bindmount accepted. This is local simulation, not actual Runpod volume attachment proof.
+Reproducibility: base digests/upstream archive hash/npm lock pinned; apt and Python transitive resolutions inventoried. Byte-identical rebuilds not claimed.
+No registry push or cloud deployment performed by this build command.

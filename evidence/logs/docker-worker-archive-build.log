@@ -484,3 +484,30 @@
 #25 31.51   Stored in directory: /tmp/pip-ephem-wheel-cache-r0ix8ui9/wheels/57/0f/98/bb57b2b57b95807699b822a35c022f139d38a02c27922f27ce
 #25 31.51 Successfully built openmontage-runpod
 #25 31.84 Installing collected packages: py-cpuinfo, Brotli, websockets, wcwidth, watchdog, uvloop, urllib3, typing_extensions, truststore, tqdm, tomlkit, tomli, six, shellingham, rignore, pyyaml, python-multipart, python-dotenv, pygments, pycparser, protobuf, propcache, pfzy, multidict, mdurl, MarkupSafe, jmespath, itsdangerous, invoke, idna, httptools, h11, frozenlist, filelock, fastar, dnspython, detect-installer, colorama, click, charset_normalizer, certifi, bcrypt, backports.zstd, backoff, attrs, annotated-types, annotated-doc, aiohappyeyeballs, agent-detector, yarl, uvicorn, typing-inspection, tqdm-loggable, sentry-sdk, requests, python-dateutil, pydantic-core, prompt-toolkit, prettytable, opentelemetry-proto, opentelemetry-api, markdown-it-py, jinja2, httpcore2, httpcore, googleapis-common-protos, email-validator, cffi, anyio, aiosignal, watchfiles, starlette, rich, pynacl, pydantic, pycares, opentelemetry-semantic-conventions, opentelemetry-exporter-otlp-proto-common, opentelemetry-exporter-http-transport, inquirerpy, httpx2, httpx, cryptography, botocore, aiohttp, typer, s3transfer, rich-toolkit, pydantic-settings, pydantic-extra-types, paramiko, opentelemetry-sdk, fastapi, aiohttp-retry, aiodns, opentelemetry-exporter-otlp-common, fastapi-cloud-cli, fastapi-cli, boto3, opentelemetry-exporter-otlp-proto-http, runpod, openmontage-runpod
+#25 40.30 Successfully installed Brotli-1.2.1 MarkupSafe-3.0.4 agent-detector-2.0.0 aiodns-4.0.4 aiohappyeyeballs-2.7.1 aiohttp-3.14.5 aiohttp-retry-2.9.1 aiosignal-1.4.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.16.0 attrs-26.1.0 backoff-2.2.1 backports.zstd-1.8.0 bcrypt-5.0.0 boto3-1.35.99 botocore-1.35.99 certifi-2026.10.23 cffi-2.1.1 charset_normalizer-3.5.2 click-8.5.0 colorama-0.4.6 cryptography-45.0.7 detect-installer-0.2.1 dnspython-2.9.2 email-validator-2.3.0 fastapi-0.162.0 fastapi-cli-0.0.32 fastapi-cloud-cli-0.26.0 fastar-0.12.0 filelock-4.2.9 frozenlist-1.8.0 googleapis-common-protos-1.76.0 h11-0.16.0 httpcore-1.0.9 httpcore2-2.16.0 httptools-0.9.0 httpx-0.28.1 httpx2-2.16.0 idna-3.20 inquirerpy-0.3.4 invoke-3.0.3 itsdangerous-2.2.0 jinja2-3.1.6 jmespath-1.1.0 markdown-it-py-4.2.0 mdurl-0.1.2 multidict-7.2.1 openmontage-runpod-0.1.1 opentelemetry-api-1.45.2 opentelemetry-exporter-http-transport-0.66b2 opentelemetry-exporter-otlp-common-0.66b2 opentelemetry-exporter-otlp-proto-common-1.45.2 opentelemetry-exporter-otlp-proto-http-1.45.2 opentelemetry-proto-1.45.2 opentelemetry-sdk-1.45.2 opentelemetry-semantic-conventions-0.66b2 paramiko-5.1.0 pfzy-0.3.4 prettytable-3.18.0 prompt-toolkit-3.0.53 propcache-0.5.4 protobuf-7.36.2 py-cpuinfo-9.0.0 pycares-5.2.1 pycparser-3.12 pydantic-2.14.2 pydantic-core-2.50.2 pydantic-extra-types-2.11.1 pydantic-settings-2.16.2 pygments-2.21.0 pynacl-1.6.2 python-dateutil-2.9.0.post0 python-dotenv-1.2.4 python-multipart-0.0.33 pyyaml-6.0.3 requests-2.34.2 rich-15.0.0 rich-toolkit-0.20.6 rignore-0.8.1 runpod-1.7.13 s3transfer-0.10.4 sentry-sdk-2.73.0 shellingham-1.5.4 six-1.17.0 starlette-1.10.0 tomli-2.5.0 tomlkit-0.15.2 tqdm-4.70.1 tqdm-loggable-0.4.1 truststore-0.10.5 typer-0.27.3 typing-inspection-0.4.5 typing_extensions-4.16.0 urllib3-2.8.0 uvicorn-0.54.0 uvloop-0.23.0 watchdog-7.0.0 watchfiles-1.3.0 wcwidth-0.9.4 websockets-17.4 yarl-1.25.1
+#25 40.30 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#25 40.44 
+#25 40.44 [notice] A new release of pip is available: 24.0 -> 26.3
+#25 40.44 [notice] To update, run: pip install --upgrade pip
+#25 DONE 43.6s
+
+#26 [runtime 8/9] COPY scripts ./scripts
+#26 DONE 0.2s
+
+#27 [runtime 9/9] COPY tests ./tests
+#27 DONE 0.1s
+
+#28 exporting to image
+#28 exporting layers
+#28 exporting layers 14.4s done
+#28 exporting manifest sha256:25ba5c76442fb936770e34f90f3d64669df8d67e4b059f0aabb68b1a826dc8f5 0.0s done
+#28 exporting config sha256:7427441247799efb31b31d053a20188a3fcec4411b04f32cf44f0e3b73cf6b18 0.0s done
+#28 exporting attestation manifest sha256:fde0cd3824bb3bf72c9acdf0079bce83590c5f55d594c66d46fd49fa8819825c 0.0s done
+#28 exporting manifest list sha256:b8b0ca6c2f32910db67eda0232d9a262264760836728e2551bf19ae82b540806
+#28 exporting manifest list sha256:b8b0ca6c2f32910db67eda0232d9a262264760836728e2551bf19ae82b540806 0.0s done
+#28 naming to docker.io/library/openmontage-worker:local done
+#28 unpacking to docker.io/library/openmontage-worker:local
+#28 unpacking to docker.io/library/openmontage-worker:local 5.9s done
+#28 DONE 20.5s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/t84jef05frzw8us93neos8krk

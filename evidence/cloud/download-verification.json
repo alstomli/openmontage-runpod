@@ -1,0 +1,32 @@
+[
+  {
+    "file": "final.mp4",
+    "bytes": 1829646,
+    "sha256": "74dcd3ea89dad436dfb14ad5d9562d5a964a0eec149ec68896dd7c9a42e3b29d",
+    "verified": true
+  },
+  {
+    "file": "captions.srt",
+    "bytes": 276,
+    "sha256": "de96c0732cfa7ee271f1cb02e8012db7cb76356bbfba867a5140f7c164b5084a",
+    "verified": true
+  },
+  {
+    "file": "thumbnail.png",
+    "bytes": 155328,
+    "sha256": "1dedb40f97b9621d1ea3a204b4264d5258a224cd3413e33ae9f1c7db68268a2b",
+    "verified": true
+  },
+  {
+    "file": "props.json",
+    "bytes": 1128,
+    "sha256": "0717c283a0e41ef91e584e56c8b6791f26846a070dbf368a0738375663e84ae8",
+    "verified": true
+  },
+  {
+    "file": "manifest.json",
+    "bytes": 1266,
+    "sha256": "70b30dff941717dea09657ee6584191b1b8a7e1b20113b106aff66781ced4b60",
+    "verified": true
+  }
+]

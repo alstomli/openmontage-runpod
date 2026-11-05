@@ -1,0 +1,7 @@
+{
+  "input": {
+    "operation": "unsupported_operation",
+    "project_id": "narrated-validation",
+    "idempotency_key": "cloud-invalid-operation-v1"
+  }
+}

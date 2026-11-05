@@ -1,13 +1,13 @@
-Final packaged-image render: PASS (uncached)
-Command: docker run --rm --network none --shm-size=1g -v D:/OpenMontage/evidence:/evidence --entrypoint python openmontage-worker:local scripts/client.py smoke --output /evidence/render-final
-Image ID: sha256:f33bf954aaa6859bbbd7ce82dccd013f307029361a1619dc4b58f24180ad2c20
-Fresh output/storage directory; no application/scripts/tests source mounts; only evidence output mount.
-Stages: prepare -> plan approval -> generate_assets (supplied media staging) -> asset approval -> compose.
-Compose elapsed: 39.019 seconds. Response cached=false.
-Output: render-final/storage/projects/smoke-test/renders/ddc5254861e91181732b803e74e17eeeb4f8904071ca9fd5f9a60a54b442ea88/final.mp4
-MP4 bytes:500093; SHA256:e9d10cb26885c70c6f96d87c29db15a846d8a4208a7051828755fad1f6ee2b2a.
-Metadata: H2641280x720 at30fps, AAC audio, 4.054seconds.
-Additional outputs: captions.srt, thumbnail.png, props.json, manifest.json.
-Fixture audio is synthetic test tone, not narrated speech. No TTS model or narration-quality claim.
-Full log: container-final-smoke.log. Initial probe evidence: render-metadata.json (same output video hash).
-This verifies local Linux Docker operation only; no real S3, Runpod worker, registry publication or cloud GPU test.
+Final packaged-image render: PASS (application0.1.1, uncached)
+Command: docker run --rm --network none --shm-size=1g -v D:/OpenMontage/evidence:/evidence --entrypoint python openmontage-worker:local scripts/client.py smoke --output /evidence/render-archive-final
+ImageID:sha256:b8b0ca6c2f32910db67eda0232d9a262264760836728e2551bf19ae82b540806
+Fresh storage/output directory; no source/scripts/test mounts; only evidence mount.
+Stages:prepare -> plan approval -> supplied assets -> asset approval -> compose.
+Compose elapsed40.618seconds, cached=false.
+Output:render-archive-final/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/final.mp4
+MP4bytes362842; SHA256:0f0c444629d47bece3c83e5f43bd69cfa782d76aef7ba5339437b319e506a29a
+Metadata:H2641280x720 at30fps, AACaudio, duration4.054seconds.
+Captions are FFmpeg/libass burned with wrapping; thumbnail visually inspected, caption fully inside frame.
+Fixture audio synthetic test tone, not speech; no TTS-backend claim.
+Full log:container-archive-final-smoke.log; metadata:render-archive-metadata.json.
+Local Docker proof only; actual Runpod mount and account compute compatibility still need cloud verification.

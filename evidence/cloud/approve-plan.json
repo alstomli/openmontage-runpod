@@ -1,0 +1,10 @@
+{
+  "input": {
+    "operation": "approve",
+    "project_id": "narrated-validation",
+    "idempotency_key": "cloud-approve-plan-v1",
+    "stage": "plan",
+    "approved": true,
+    "artifact_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee"
+  }
+}

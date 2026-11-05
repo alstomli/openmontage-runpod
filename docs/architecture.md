@@ -37,7 +37,9 @@ The client holds no expensive worker while a person reviews a plan. Each submitt
 | Artifact storage | Keep plans, inputs, outputs and completion metadata across worker shutdowns | Durable |
 | Runpod endpoint | Schedule container workers and enforce resource/time limits | Queue state with bounded retention |
 
-Local filesystem storage is useful for development and can also use a persistent mounted network volume in cloud operation. The external S3 adapter is another option where the provider supports its conditional-create and presigned-download contract. A local directory inside a disposable container cannot establish recovery across worker replacement. For the user's existing Runpod storage, the proposed owned directory is `/runpod-volume/openmontage`; sibling model files must remain intact. Its actual mount and compute compatibility require cloud verification.
+The actual cloud deployment uses the filesystem adapter on the user's persistent Runpod network volume at `/runpod-volume/openmontage`. The same adapter can use an ordinary local directory during development, but a directory on disposable container disk is not durable. A startup guard checks the required mount before serving jobs. The successful cloud workflow persisted plans/assets across observed worker IDs and its output was read back independently.
+
+Runpod's regional S3 API is an **external authenticated transfer path** to that volume: it uploaded inputs and downloaded all five verified outputs. The worker itself does not use S3 credentials for its filesystem operations. The optional generic S3 adapter is a different deployment profile, relying on conditional object creation and presigned downloads; those generic-provider semantics remain unverified. Existing sibling LLM/model files were not listed or deleted.
 
 ## Approval, retries, and concurrency
 
@@ -46,6 +48,8 @@ Approvals bind to the version or content hash reviewed. A changed storyboard nee
 Idempotency protects the same logical request from producing conflicting results when a client retries. Persisted completion metadata and artifact validation determine whether completed work can be reused. A project lock prevents overlapping writes. A test that mocks rendering can prove control flow; a real interruption/restart test is needed to prove recovery of media work.
 
 Begin with one concurrent production per worker and one maximum worker in validation. This bounds resource contention and simplifies diagnosis. It does not establish multi-worker safety; distributed locking and a concurrent execution test must be verified before scaling.
+
+The provider adapter is also a boundary that needs live testing. Local errors are structured dictionaries; the 0.1.2 Runpod handler serializes sanitized `{code,message}` into an error string required by the platform transport. An earlier intermediate-SDK test missed a live failure: 0.1.1 lost the dictionary and returned outer `COMPLETED`. Full wire-path tests cover this locally, and actual 0.1.2 retests verified provider `FAILED` with the diagnostic plus a fresh normal `COMPLETED` prepare. Successful media output and failure-status correctness are distinct acceptance checks, both recorded with their version provenance.
 
 ## Runtime and security boundaries
 

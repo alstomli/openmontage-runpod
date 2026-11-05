@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:10,000
+Approved storyboard, pinned
+OpenMontage, Linux container.
+
+2
+00:00:10,000 --> 00:00:20,000
+Validate inputs, check
+approvals, save persistent
+results.
+
+3
+00:00:20,000 --> 00:00:30,000
+Review between jobs. Verify
+rendering before GPU generation.

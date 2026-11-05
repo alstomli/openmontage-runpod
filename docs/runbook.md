@@ -34,6 +34,7 @@ Do not log API keys, signed download URLs, authorization headers, full environme
 |---|---|---|
 | Job rejected before media work | Operation, schema, scene count, duration, paths and approval version | Fix the request. Do not retry unchanged invalid input indefinitely. |
 | Approval mismatch | Hash/version of approved plan or assets | Review the current version and explicitly approve it. Never copy an old approval onto changed content. |
+| Invalid job shows outer `COMPLETED` with `output.status: failed` and no diagnostic | Deployed wrapper version and real SDK serialized payload | Observed in 0.1.1. Use the 0.1.2 sanitized JSON-string error adapter and verify actual provider failure with a fresh negative job; local dictionary/SDK-intermediate checks are insufficient. |
 | `project_busy` | Existing execution lock and active job status | Determine whether another job is active. Follow stale-lock procedure only after proving it stopped. |
 | Missing artifact | Storage backend, bucket/prefix, key, permissions | Restore/upload the correct object and retry the relevant stage. |
 | Browser fails at startup | Linux browser path, dependencies, shared memory, image version | Reproduce with the exact image; retain stderr. |
@@ -64,6 +65,16 @@ Automated stale-lock recovery requires a stronger lease/ownership protocol and t
 Request receipts are keyed by operation/project/idempotency key and normalized input, not image build. The same intact receipt can intentionally return old stable output even after code changes. When changing renderer or upstream behavior, bump the wrapper version and use fresh request idempotency keys; then record the new render manifest and image identity. Do not cite an old cached render as evidence for a new image.
 
 The current application is a trusted single-account worker. Version approval is not multi-tenant authorization. Do not expose its operator workflow as an untrusted public multi-user service without an authenticated isolation layer and its tests.
+
+## Provider error gate after 0.1.2 redeployment
+
+1. Confirm the deployed build is fix commit `5a69307` (or its verified successor), not the earlier successful-media 0.1.1 build.
+2. Submit a new invalid-operation request with a fresh key, retain the full provider response, and require provider-level failure plus the preserved sanitized error.
+3. Decode the error JSON string and check only safe `code`/`message`; no raw traceback, credentials or internal media diagnostics should appear.
+4. Submit a normal prepare request and verify the success path remains usable.
+5. Record both job IDs/build identity before marking the transport fix live verified. A reused successful video or cached receipt does not test this boundary.
+
+The successful 0.1.1 media output remains valid evidence for unchanged `media.py`. Avoid an unnecessary expensive rerender for an isolated handler-serialization change; rerun the changed boundary and tests appropriate to it.
 
 ## Rollback
 

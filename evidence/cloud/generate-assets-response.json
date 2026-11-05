@@ -1,0 +1,36 @@
+{
+  "delayTime": 4122,
+  "executionTime": 371,
+  "id": "2617812b-fe2d-4fe7-8011-550ea3b43f54-u1",
+  "output": {
+    "approval_stage": "assets",
+    "artifact_hash": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d",
+    "artifacts": [
+      {
+        "bytes": 1297002,
+        "key": "projects/narrated-validation/blobs/894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3.wav",
+        "local_path": "/runpod-volume/openmontage/projects/narrated-validation/blobs/894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3.wav",
+        "sha256": "894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3"
+      },
+      {
+        "bytes": 713,
+        "key": "projects/narrated-validation/blobs/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+        "local_path": "/runpod-volume/openmontage/projects/narrated-validation/blobs/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+        "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+      },
+      {
+        "bytes": 831,
+        "key": "projects/narrated-validation/assets/e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d.json",
+        "local_path": "/runpod-volume/openmontage/projects/narrated-validation/assets/e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d.json",
+        "sha256": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d"
+      }
+    ],
+    "cached": false,
+    "operation": "generate_assets",
+    "plan_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+    "project_id": "narrated-validation",
+    "status": "awaiting_approval"
+  },
+  "status": "COMPLETED",
+  "workerId": "ap64a5w4royb1u"
+}

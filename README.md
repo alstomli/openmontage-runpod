@@ -2,13 +2,22 @@
 
 A deployment wrapper for turning an approved storyboard and supplied media into a narrated, captioned explainer video using OpenMontage's Remotion composer.
 
-Public repository: [alstomli/openmontage-runpod](https://github.com/alstomli/openmontage-runpod). The foundation is published on `main`; implementation review/push and live deployment have separate evidence gates.
+Public repository: [alstomli/openmontage-runpod](https://github.com/alstomli/openmontage-runpod), [draft PR #1](https://github.com/alstomli/openmontage-runpod/pull/1). The successful cloud media run used 0.1.1 at `95f5ecd`; transport correction 0.1.2 at `5a69307` is deployed and its live negative/normal-prepare checks passed.
 
-The first milestone is a repeatable supplied-asset render. A packaged image passed 24 unit and 22 reliability checks and a real four-second offline render. A subsequent 30-second narrated fixture exposed clipped phrase captions during visual review, despite valid media metadata. That rendering defect is being corrected and retested; the earlier image is not an accepted narrated release. This wrapper does not claim a deployed public service, real-provider S3 validation, GPU generation, speech synthesis, automatic script planning or the full autonomous OpenMontage workflow.
+Runpod endpoint [openmontage-staging](https://console.runpod.io/serverless/user/endpoint/aocbogtvk098ds) built and ran the complete supplied-media workflow. A 30-second cloud MP4 and all four companion artifacts were downloaded with matching hashes. It uses a persistent mounted network volume through the filesystem adapter; Runpod S3 is used externally for authenticated file transfer.
+
+The cloud prototype's captions/subtitles were visually inspected at three points; upstream title animation can still wrap within a word. Live negative testing found and corrected a 0.1.1 error-transport defect. The 0.1.2 fix passed 31 unit + 23 reliability checks, then live invalid input returned provider `FAILED` with its sanitized diagnostic and a fresh normal prepare returned `COMPLETED`. See [live validation](docs/live-validation.md) and [evidence](evidence/index.md). GPU generation, speech synthesis, script planning, multi-tenant operation and the full autonomous OpenMontage workflow are outside this baseline.
 
 ## Quick local verification
 
-From the repository root with Docker's Linux engine available:
+For a fresh checkout, choose a parent directory and clone the implementation branch explicitly. Default `main` still contains the foundation; the draft PR is intentionally unmerged for review.
+
+```powershell
+git clone --branch feat/runpod-worker --recurse-submodules https://github.com/alstomli/openmontage-runpod.git
+Set-Location openmontage-runpod
+```
+
+For an existing checkout, use its implementation branch instead. From the repository root with Python for the pin-check script and Docker's Linux engine available:
 
 ```powershell
 git submodule update --init --recursive
@@ -22,6 +31,8 @@ docker run --rm --network none --shm-size=1g --mount "type=bind,source=$output,t
 
 The smoke fixture uses a four-second tone, supplied image and phrase captions. It proves execution and media output, not narration quality or AI generation. See [the walkthrough](docs/deployment-walkthrough.md) for supplied narration, approvals, cloud preparation and verification boundaries.
 
+The Dockerfile downloads upstream from a fixed commit archive with a SHA-256 checksum, so Runpod's GitHub builder does not need to initialize submodules. The local submodule is retained for source inspection and CI pin checks.
+
 ## Start here
 
 | You want to understand… | Read |
@@ -29,6 +40,7 @@ The smoke fixture uses a four-second tone, supplied image and phrase captions. I
 | What we are building and how a request moves through it | [Architecture](docs/architecture.md) |
 | Exact request fields, limits and client commands | [Request contract](docs/request-contract.md) |
 | The ordered setup and deployment process | [Deployment walkthrough](docs/deployment-walkthrough.md) |
+| What actually ran on Runpod, how files were transferred, and how corrections were verified | [Live validation record](docs/live-validation.md) |
 | Why we chose this design | [Decision log](docs/decisions.md) |
 | How to investigate failures and recover safely | [Operations runbook](docs/runbook.md) |
 | How to explain and defend this project in an interview | [Interview guide](docs/interview-guide.md) |

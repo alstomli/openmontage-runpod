@@ -1,6 +1,10 @@
-Deployment preparation: PASS (dry-run only)
-Command: python scripts/prepare_deployment.py --image ghcr.io/example/openmontage@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --bucket example-bucket --cpu-flavor example-confirm-in-console --output evidence/logs/deployment-dry-run.json
-Result: writes template and endpoint review payloads; no network calls; no resources created.
-All image, bucket, and CPU flavor values in this dry-run are dummy examples, not deployable credentials or confirmed resources.
-Configuration: CPU supplied-asset worker, active=0 max=1 concurrent jobs=1, S3 persistent outputs, 20-minute execution timeout.
-Real deployment still needs image publication, actual storage configuration/secrets, account CPU availability/pricing check, and user approval of cloud spend.
+Deployment preparation:PASS(dry-run only)
+Scripts/prepare_deployment.py supports genericS3 OR existing mounted network volume.
+Mounted example uses networkVolumeId=l34ba8wnno, datacenterEU-RO-1, STORAGE_BACKEND=local, LOCAL_STORAGE_ROOT=/runpod-volume/openmontage, REQUIRE_NETWORK_VOLUME=1.
+Existing sibling LLM/model files are preserved. No deletion is needed.
+File:evidence/logs/network-volume-plan.json. Image digest and CPUflavor there are placeholders; storageID/region came from root console inspection.
+GenericS3 example remains evidence/logs/deployment-dry-run.json(all resource values are dummy examples).
+Neither script makes network calls or creates resources. Presigned downloads are NOT supported by RunpodS3 API, so genericS3 mode rejects RunpodS3 endpoint URLs.
+Official API schema includes networkVolumeId for common CPU/GPU endpoint request; actual CPU attachment/scheduling availability inEU-RO-1 is pending account/UI confirmation.
+Mounted outputs are worker filesystem paths; transfer requires authenticated volume tools or RunpodS3 API.
+Default active0/max1/concurrency1,20minute execution. Direct GitHub source deployment can build without submodule recursion; checksum-pinned upstream archive is fetched during Docker build.

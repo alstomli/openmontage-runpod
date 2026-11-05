@@ -1,0 +1,150 @@
+SRE cloud readiness review — supplied-asset prototype, wrapper 0.1.1
+Project date: 2026-11-04 (America/New_York)
+Review mode: read-only local evidence and source; no credential reads or cloud API/UI actions.
+
+Evidence inspected
+- evidence/cloud/prepare-response.json
+- evidence/cloud/plan-storage-verification.json
+- evidence/cloud/inputs-transfer.json
+- deployment/staging.json
+- source at commit 95f5ecdf99e8daccf0225c45e9c6c771b979503a
+- scripts/start_worker.py and retained mount-guard checks
+- final local unit/reliability/render logs and supplied-speech verification
+
+Verified so far
+1. The saved real Runpod prepare response has outer status COMPLETED, inner status
+   awaiting_approval, project narrated-validation, and the expected 30-second plan.
+2. Plan SHA256 669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee
+   matches both worker output and separately retrieved 1736-byte stored plan.
+3. Worker output local_path is /runpod-volume/openmontage/projects/...; the S3 transfer
+   prefix openmontage/ and bucket l34ba8wnno align with this mounted-volume profile.
+4. Both supplied source objects have retained read-back-verified byte counts and hashes.
+5. Current app version is 0.1.1. Application/handler/Docker/dependency source has no
+   working-tree diff from recorded build commit 95f5ecd at review time.
+6. Required-volume startup guard rejects absent mounts and restricts the dedicated
+   storage profile to local backend at /runpod-volume/openmontage. Negative and mounted
+   local Docker simulation logs are retained. Live prepare demonstrates real persistence.
+7. git check-ignore .env succeeds; git ls-files .env returns no tracked file. No secret
+   content was opened by this review. This is an exclusion check, not a content audit.
+8. Final local reliability evidence records all 22 checks passing with zero skips;
+   separate current app unit suite and packaged offline render evidence exist.
+
+Interpretation limits
+- Runtime backend is LocalStore on an attached network volume. The S3 interface is
+  used by external transfer/readback tooling. These steps do not prove worker S3Store
+  conditional PutObject compatibility; it is unnecessary for this selected profile.
+- Prepare delayTime=46628 ms is provider-reported queue/scheduling/startup delay combined,
+  not a pure measured image/model cold-start duration. executionTime=224 ms covers prepare.
+- Recorded source commit is consistent with inspected source. A prepare response has no
+  build fingerprint. Retain completed Runpod build detail/source commit for provenance;
+  do not claim local and cloud rebuilt images are byte-identical.
+- A 30-second local supplied-speech video previously passed metadata/visual checks.
+  This is not yet proof of successful cloud composition or GPU/TTS generation.
+- deployment/staging.json still contains an earlier build-in-progress status; reconcile
+  after the final live result rather than treating it as current endpoint health.
+
+Recommended remaining cheap runtime checks
+1. Re-submit the exact prepare request after worker scale-down/replacement. Require
+   cached=true and identical plan hash; a different workerId makes replacement explicit.
+2. Submit a deterministic invalid operation (valid project/key fields). Require provider
+   FAILED plus invalid_input. If not racing approvals, an unapproved asset request may
+   instead establish FAILED plus approval_required. No destructive crash test required.
+
+Additional stage evidence verified
+- Plan approval and generate_assets responses are provider COMPLETED; their inner
+  states are approved and awaiting_approval respectively.
+- Asset approval is provider COMPLETED on worker 0lwirxhe7d9ph2, different from the
+  earlier ap64a5w4royb1u. This verifies persisted manifest access after replacement.
+- Independent normalization of prepare.json with the recorded application schema
+  reproduces the worker plan hash. Six consistency assertions pass: normalized plan,
+  plan approval, asset-to-plan linkage, asset approval, compose-to-assets linkage,
+  and replacement worker identity.
+
+Final cloud composition and artifact evidence
+- Compose job 1cdc79ce-3fbb-4458-b71c-3e66d4ba3852-u1 is provider COMPLETED and
+  application completed on worker 0lwirxhe7d9ph2. executionTime=138890 ms,
+  delayTime=4285 ms. This is one workload measurement, not a throughput/cost guarantee.
+- Independently rehashed the actual downloaded final.mp4, captions.srt, thumbnail.png,
+  props.json and manifest.json. All five byte counts and SHA256 values exactly match
+  the live worker response, independently of download-verification.json flags.
+- Final video: 1829646 bytes, SHA256
+  74dcd3ea89dad436dfb14ad5d9562d5a964a0eec149ec68896dd7c9a42e3b29d.
+  Retained ffprobe evidence: 30.059 seconds, 1280x720, 30 fps, H.264 video and AAC audio.
+- Manifest links the exact approved plan and asset hashes. Source-derived render
+  fingerprint (asset hash + wrapper 0.1.1 + pinned upstream commit) reproduces
+  worker artifact_hash 745fb196374d878ebe47bbb2de99422864a852027f21c654016d89a65e40d877.
+- Downloaded SRT text and timing exactly match the approved storyboard caption cues.
+- SRE inspected cloud-render-15s.png: title, subtitle and caption are visible and inside
+  the frame. Coordinator reports additional 5s/25s review with the known upstream
+  midword title-wrap limitation. This is representative layout review, not creative QA.
+- Retained actual Runpod build log records registry image tag 95f5ecdf9 and exported
+  manifest sha256:4bc953785403c6ca7f7ec9d2e0174c44ff74574d82d73e257024131088eca8df.
+  This improves cloud source/build provenance; local and cloud rebuilds need not be identical.
+- Exact prepare replay job 49081fd1-4821-4454-9bce-13affb7145a4-u1 is COMPLETED,
+  cached=true, same plan hash, executionTime=173 ms. Its worker is the original prepare
+  worker ap64a5w4royb1u. Therefore this check establishes receipt replay, not replacement
+  on that particular request; separate asset-approval/compose worker change proves persistence.
+
+Live failure-channel defect — release gate reopened
+- Negative job 6444eb3d-d686-4106-b0ee-4f5370678ee4-u2 returned provider COMPLETED
+  with output={"status":"failed"}; the structured error was absent. This is a real
+  operational defect even though the successful 30-second video remains valid evidence.
+- Earlier SRE tests verified rp_job.run_job extracted a handler error dictionary. That
+  intermediate assertion did not prove the platform accepted the reported error type.
+  The live result invalidates the earlier failure-channel confidence.
+- Full pinned SDK inspection: handle_job calls send_result; rp_http._handle_result
+  JSON-serializes the result and transmits it unchanged. The service did not preserve
+  our dict-valued error. Official handler guidance uses a string-valued error instead.
+- Developer 0.1.2 changes only the provider adapter to JSON-serialize execute's safe
+  {code,message} error into a string. Local execute retains its structured contract;
+  no raised traceback or raw caught exception is introduced. Media rendering is unchanged.
+- Strengthened reliability suite has 23 tests. New regression captures the real SDK
+  reporting path at rp_http._transmit (mocked, networking disabled), requires error to
+  be a string, and decodes the original safe code/message. This checks the serialized
+  wire payload, not platform ingestion. Diagnostic 0.1.2 handler-mounted run passes
+  23/23; see sre-error-wire-regression.txt. Against the unchanged old 0.1.1 image,
+  the strengthened SDK tests fail 2/3 specifically on dict-vs-string type, as retained
+  in sre-error-wire-before-fix.txt.
+- Final exact packaged 0.1.2 local image
+  sha256:88cc4fe198b518659ca0450ce07e9f1a9aa1691f4a814aec3c527dfaaaf66252
+  passes all 31 unit and 23 reliability tests, zero skips, network disabled, no source
+  or test mounts. Packaged handler SHA256
+  60e30a9a889d24d2a43dd9ba4ba7559cf2228748109cd292c20b94ccec52ab16.
+  Retained verification: 016-0.1.2-handler-verification.txt and sre-0.1.2-tests.txt.
+
+Corrective deployment verification and documentation reconciliation
+- Corrective source commit is 5a69307939f0ea259d23904ae50c202ba34635a7. The retained
+  active/completed-build screenshot identifies the corrective build. Source comparison
+  95f5ecd -> 5a69307 shows no changes to media.py or runner.py.
+- Live 0.1.2 negative job f05f1304-0659-4c49-82a3-1fece3f50b1d-u2 is provider FAILED
+  on worker r96k623chzgpya. executionTime=235 ms; delayTime=4806 ms. Independently
+  parsed error is a string whose JSON decoding yields exactly
+  {"code":"invalid_input","message":"Unknown operation."}, with no traceback.
+  Screenshot 017-live-error-corrected.jpg visibly matches this job/status/error.
+  This closes the observed failure-channel defect in the actual provider.
+- Fresh 0.1.2 prepare job a426eee3-aaeb-4589-b031-775ccfcd9a49-u1 is provider COMPLETED,
+  application awaiting_approval, cached=false, and returns the original verified plan
+  hash with 1736 bytes on worker 64drlvc6ms55j7. executionTime=206 ms;
+  delayTime=56462 ms. The request uses a fresh idempotency key, so this verifies the
+  success path on the corrective deployment rather than only replaying a receipt.
+- Screenshot 018-live-success-after-fix.jpg shows the matching request/plan and a
+  snapshot with zero running workers and zero queued jobs. Its captured endpoint label
+  is Initializing; the successful job JSON is the authoritative completed-result evidence.
+- Rechecked .env exclusion: ignored and not tracked. Did not read credentials.
+- No expensive media rerender is necessary solely for the adapter change; preserve
+  0.1.1 media provenance explicitly. The current source error adapter is 0.1.2.
+- Reconcile Recorder status and endpoint/source build evidence. Retain all request/approval
+  hashes and snapshots; preserve known limits: trusted single-account access, explicit
+  stale-lock recovery, fresh idempotency keys after renderer changes, no GPU generation,
+  and platform-wide scope of the user-approved S3 transfer key.
+
+Readiness assessment
+PASS for the stated supplied-asset staging scope. End-to-end cloud production and
+verified artifact retrieval are established for 0.1.1. The failure-channel defect is
+corrected and real-provider verified on 0.1.2, whose fresh success path also completes.
+No unresolved material operational blocker was found in this scope. Reconcile the
+recorded staging status/source and documentation to the final corrective deployment.
+This review does not certify production scale, arbitrary inputs, commercial creative
+quality, GPU generation, worker TTS synthesis, or the unused worker S3Store backend.
+S3 transfer access uses the user-approved platform-wide-volume key; secrets remain
+in ignored local configuration, and existing sibling model files were not deleted.
