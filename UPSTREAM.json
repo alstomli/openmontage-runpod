@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/calesthio/OpenMontage",
+  "commit": "d21f5d4eaa08422b09c7091757a05affcbabb35b",
+  "path": "vendor/OpenMontage",
+  "license": "AGPL-3.0",
+  "integration": "Pinned upstream Remotion templated renderer; upstream source is unmodified."
+}

@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example
+node_modules/
+work/
+outputs/
+.work/
+.local-storage/
+evidence/test-tmp/
+*.egg-info/
+.coverage
+evidence/logs/*raw*
