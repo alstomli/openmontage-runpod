@@ -1,0 +1,11 @@
+Container build: PASS
+Command: docker build --platform linux/amd64 -t openmontage-worker:local --progress plain .
+Target: runtime (full packaged application, handler, scripts, unit and reliability suites).
+Final local image ID: sha256:f33bf954aaa6859bbbd7ce82dccd013f307029361a1619dc4b58f24180ad2c20
+Upstream: d21f5d4eaa08422b09c7091757a05affcbabb35b
+Versions: Python3.11.11, Node22.14.0, FFmpeg5.1.9, Chromium156.0.8078.79, Remotion4.0.484.
+Full log: docker-worker-frozen-build.log
+Inventories inside image: /opt/upstream.json, /opt/system-packages.txt, /opt/python-packages.txt.
+Packaged tests: 24 unit PASS; 22 reliability/SDK PASS; no skips; network disabled; no source mounts.
+Reproducibility boundary: base image digests, upstream commit and npm lockfile pinned. apt and Python transitive versions resolve during builds and are inventoried; byte-identical rebuilds not claimed.
+No registry push or Runpod cloud deployment performed by these commands.

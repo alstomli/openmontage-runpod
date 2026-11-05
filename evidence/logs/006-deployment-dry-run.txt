@@ -1,0 +1,6 @@
+Deployment preparation: PASS (dry-run only)
+Command: python scripts/prepare_deployment.py --image ghcr.io/example/openmontage@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --bucket example-bucket --cpu-flavor example-confirm-in-console --output evidence/logs/deployment-dry-run.json
+Result: writes template and endpoint review payloads; no network calls; no resources created.
+All image, bucket, and CPU flavor values in this dry-run are dummy examples, not deployable credentials or confirmed resources.
+Configuration: CPU supplied-asset worker, active=0 max=1 concurrent jobs=1, S3 persistent outputs, 20-minute execution timeout.
+Real deployment still needs image publication, actual storage configuration/secrets, account CPU availability/pricing check, and user approval of cloud spend.

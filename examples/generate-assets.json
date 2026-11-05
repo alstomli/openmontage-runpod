@@ -1,0 +1,6 @@
+{
+  "input": {
+    "operation": "generate_assets", "project_id": "demo", "idempotency_key": "assets-demo-v1",
+    "artifact_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

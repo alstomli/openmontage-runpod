@@ -1,0 +1,7 @@
+{
+  "input": {
+    "operation": "approve", "project_id": "demo", "idempotency_key": "approve-plan-demo-v1",
+    "stage": "plan", "approved": true,
+    "artifact_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

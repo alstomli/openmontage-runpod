@@ -1,0 +1,9 @@
+Captured environment checks (America/New_York project date: 2026-11-04)
+UTC capture: 2026-11-05T03:34:38.6520360Z
+Upstream: d21f5d4eaa08422b09c7091757a05affcbabb35b
+Python: Python 3.13.2
+Node: v19.0.0
+FFmpeg on Windows PATH: False
+Docker engine requires the approved elevated execution context.
+Runpod credentials: not configured; live cloud deployment is pending configuration.
+No paid provider calls performed.

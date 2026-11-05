@@ -1,0 +1,22 @@
+{
+  "input": {
+    "operation": "prepare",
+    "project_id": "demo",
+    "idempotency_key": "prepare-demo-v1",
+    "storyboard": {
+      "title": "Supplied-asset explainer",
+      "width": 1280,
+      "height": 720,
+      "theme": "flat-motion-graphics",
+      "scenes": [
+        {"text": "Your approved first scene", "duration": 15, "image": {"key": "inputs/demo/scene.png", "sha256": "0000000000000000000000000000000000000000000000000000000000000000"}},
+        {"text": "Your approved second scene", "duration": 15}
+      ],
+      "narration": {"key": "inputs/demo/narration.wav", "sha256": "0000000000000000000000000000000000000000000000000000000000000000"},
+      "captions": [
+        {"text": "Replace these cues with accurate supplied narration timing.", "start": 0, "end": 15},
+        {"text": "Upload your media and replace both key and sha256 references.", "start": 15, "end": 30}
+      ]
+    }
+  }
+}

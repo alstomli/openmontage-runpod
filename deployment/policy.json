@@ -1,0 +1,15 @@
+{
+  "runtime": "cpu-supplied-assets",
+  "endpoint_type": "queue",
+  "active_workers": 0,
+  "maximum_workers": 1,
+  "jobs_per_worker": 1,
+  "remotion_concurrency": 1,
+  "execution_timeout_ms": 1200000,
+  "request_ttl_ms": 3600000,
+  "storage_profiles": ["generic_s3", "mounted_network_volume"],
+  "network_volume_storage_root": "/runpod-volume/openmontage",
+  "gpu_generation_supported": false,
+  "publication": "manual_after_ci_and_sre_review",
+  "cloud_deployment": "manual_after_credentials_and_cost_review"
+}

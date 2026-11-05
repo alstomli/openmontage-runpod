@@ -1,0 +1,246 @@
+{
+  "fixture": "30 seconds, offline Windows Zira supplied speech; phrase captions manually timed, not aligned words",
+  "steps": [
+    {
+      "request": {
+        "input": {
+          "operation": "prepare",
+          "project_id": "narrated-validation",
+          "idempotency_key": "narrated-v1-0",
+          "storyboard": {
+            "title": "How this deployment works",
+            "scenes": [
+              {
+                "text": "Approved storyboard to finished video",
+                "subtitle": "Pinned upstream code. Reproducible Linux environment.",
+                "duration": 10,
+                "image": {
+                  "key": "inputs/narrated-validation/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+                  "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+                }
+              },
+              {
+                "text": "Validate, approve, persist",
+                "subtitle": "Version-bound review and durable production artifacts.",
+                "duration": 10,
+                "image": {
+                  "key": "inputs/narrated-validation/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+                  "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+                }
+              },
+              {
+                "text": "Prove rendering before adding generation",
+                "subtitle": "Supplied speech fixture; GPU generation remains a later milestone.",
+                "duration": 10,
+                "image": {
+                  "key": "inputs/narrated-validation/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+                  "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+                }
+              }
+            ],
+            "narration": {
+              "key": "inputs/narrated-validation/894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3.wav",
+              "sha256": "894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3"
+            },
+            "captions": [
+              {
+                "text": "Approved storyboard, pinned OpenMontage, Linux container.",
+                "start": 0,
+                "end": 10
+              },
+              {
+                "text": "Validate inputs, check approvals, save persistent results.",
+                "start": 10,
+                "end": 20
+              },
+              {
+                "text": "Review between jobs. Verify rendering before GPU generation.",
+                "start": 20,
+                "end": 30
+              }
+            ]
+          }
+        }
+      },
+      "response": {
+        "status": "awaiting_approval",
+        "approval_stage": "plan",
+        "artifact_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+        "duration": 30.0,
+        "artifacts": [
+          {
+            "key": "projects/narrated-validation/plans/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json",
+            "sha256": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+            "bytes": 1736,
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/plans/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json"
+          }
+        ],
+        "capabilities": {
+          "supplied_assets": true,
+          "plain_script_planning": false,
+          "image_generation": false,
+          "tts_generation": false,
+          "render_runtime": "remotion",
+          "composition_mode": "templated"
+        },
+        "operation": "prepare",
+        "project_id": "narrated-validation",
+        "cached": false
+      },
+      "elapsed_seconds": 0.199
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "approve",
+          "project_id": "narrated-validation",
+          "idempotency_key": "narrated-v1-1",
+          "stage": "plan",
+          "artifact_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+          "approved": true
+        }
+      },
+      "response": {
+        "status": "approved",
+        "approval_stage": "plan",
+        "artifact_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+        "artifacts": [
+          {
+            "key": "projects/narrated-validation/approvals/plan/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json",
+            "sha256": "e5c87b859183c014d64c8db6496d76a6649eb5166f7f21e972c83dba34028366",
+            "bytes": 115,
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/approvals/plan/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json"
+          }
+        ],
+        "operation": "approve",
+        "project_id": "narrated-validation",
+        "cached": false
+      },
+      "elapsed_seconds": 0.247
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "generate_assets",
+          "project_id": "narrated-validation",
+          "idempotency_key": "narrated-v1-2",
+          "artifact_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee"
+        }
+      },
+      "response": {
+        "status": "awaiting_approval",
+        "approval_stage": "assets",
+        "artifact_hash": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d",
+        "plan_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+        "artifacts": [
+          {
+            "key": "projects/narrated-validation/blobs/894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3.wav",
+            "sha256": "894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3",
+            "bytes": 1297002,
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/blobs/894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3.wav"
+          },
+          {
+            "key": "projects/narrated-validation/blobs/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+            "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6",
+            "bytes": 713,
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/blobs/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png"
+          },
+          {
+            "key": "projects/narrated-validation/assets/e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d.json",
+            "sha256": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d",
+            "bytes": 831,
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/assets/e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d.json"
+          }
+        ],
+        "operation": "generate_assets",
+        "project_id": "narrated-validation",
+        "cached": false
+      },
+      "elapsed_seconds": 0.513
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "approve",
+          "project_id": "narrated-validation",
+          "idempotency_key": "narrated-v1-3",
+          "stage": "assets",
+          "artifact_hash": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d",
+          "approved": true
+        }
+      },
+      "response": {
+        "status": "approved",
+        "approval_stage": "assets",
+        "artifact_hash": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d",
+        "artifacts": [
+          {
+            "key": "projects/narrated-validation/approvals/assets/e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d.json",
+            "sha256": "396ad2bb9851f98a07a486dde3d9142e8a1af540bc76594bc1b3b7848bfcfbd8",
+            "bytes": 117,
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/approvals/assets/e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d.json"
+          }
+        ],
+        "operation": "approve",
+        "project_id": "narrated-validation",
+        "cached": false
+      },
+      "elapsed_seconds": 0.144
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "compose",
+          "project_id": "narrated-validation",
+          "idempotency_key": "narrated-v1-4",
+          "artifact_hash": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d"
+        }
+      },
+      "response": {
+        "status": "completed",
+        "artifact_hash": "cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41",
+        "artifacts": [
+          {
+            "key": "projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/final.mp4",
+            "sha256": "821234cdba0d59cd69b70a252073a6551ff5a3d5a1b5dcfc630bf920c870e697",
+            "bytes": 2075996,
+            "kind": "video",
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/final.mp4"
+          },
+          {
+            "key": "projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/captions.srt",
+            "sha256": "8938fe232d3b086bca7bb916f2bf61953e4e801e599f5cee6b01bf13f58931f9",
+            "bytes": 276,
+            "kind": "captions",
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/captions.srt"
+          },
+          {
+            "key": "projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/thumbnail.png",
+            "sha256": "a667a4687b40e524fc76c041d7b5a716b1c7406d6a9c907ac28b8f612ff7e24b",
+            "bytes": 253105,
+            "kind": "thumbnail",
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/thumbnail.png"
+          },
+          {
+            "key": "projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/props.json",
+            "sha256": "b73b147389f7913950f8da7b6097c1f99b848e592eebf7dfe52cb7d55f7ae9f1",
+            "bytes": 1487,
+            "kind": "props",
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/props.json"
+          },
+          {
+            "key": "projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/manifest.json",
+            "sha256": "585091af0a016cbe7665dd6ad6ef1eb729e732a0b2bc4175a7d762cb3cf6cf3c",
+            "bytes": 1179,
+            "kind": "manifest",
+            "local_path": "/evidence/narrated-smoke/storage/projects/narrated-validation/renders/cbb56d93c97a8e96f29a138850de3413f284fac2c6419747adee1af48decdf41/manifest.json"
+          }
+        ],
+        "operation": "compose",
+        "project_id": "narrated-validation",
+        "cached": false
+      },
+      "elapsed_seconds": 251.64
+    }
+  ]
+}

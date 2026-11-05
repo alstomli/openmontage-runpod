@@ -11,6 +11,13 @@ outputs/
 .work/
 .local-storage/
 evidence/test-tmp/
+.build-cache/
+evidence/**/storage/
+evidence/**/scratch/
+evidence/**/inputs/
+evidence/demo.mp4
+evidence/demo-thumbnail.png
+deployment/plan.json
 *.egg-info/
 .coverage
 evidence/logs/*raw*

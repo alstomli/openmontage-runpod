@@ -1,0 +1,56 @@
+{"event": "stage_started", "operation": "prepare", "project_id": "smoke-test"}
+{"elapsed_seconds": 0.089, "event": "stage_completed", "operation": "prepare", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "approve", "project_id": "smoke-test"}
+{"elapsed_seconds": 0.197, "event": "stage_completed", "operation": "approve", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "generate_assets", "project_id": "smoke-test"}
+{"event": "asset_staged", "kind": "narration", "project_id": "smoke-test", "sha256": "30fed97cf2b340160f065ba962cc32ae249441d30661e123c3bf06854e8b7e12"}
+{"event": "asset_staged", "kind": "image", "project_id": "smoke-test", "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"}
+{"elapsed_seconds": 0.436, "event": "stage_completed", "operation": "generate_assets", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "approve", "project_id": "smoke-test"}
+{"elapsed_seconds": 0.182, "event": "stage_completed", "operation": "approve", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "compose", "project_id": "smoke-test"}
+{"elapsed_seconds": 42.686, "event": "stage_completed", "operation": "compose", "project_id": "smoke-test"}
+{
+  "status": "completed",
+  "artifact_hash": "45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573",
+  "artifacts": [
+    {
+      "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/final.mp4",
+      "sha256": "0f0c444629d47bece3c83e5f43bd69cfa782d76aef7ba5339437b319e506a29a",
+      "bytes": 362842,
+      "kind": "video",
+      "local_path": "/evidence/render-0.1.1/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/final.mp4"
+    },
+    {
+      "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/captions.srt",
+      "sha256": "948b080f936c769c45439ccdcfa8aa50a345756cc9edc49bc4c3a2b2cb617019",
+      "bytes": 145,
+      "kind": "captions",
+      "local_path": "/evidence/render-0.1.1/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/captions.srt"
+    },
+    {
+      "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/thumbnail.png",
+      "sha256": "e945707cb4b10afcd49d6933e65c3621d7ff1655ca7273ab1f2029108f38f4bb",
+      "bytes": 141920,
+      "kind": "thumbnail",
+      "local_path": "/evidence/render-0.1.1/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/thumbnail.png"
+    },
+    {
+      "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/props.json",
+      "sha256": "6966deccdbc730038d0fe8262a5cc0fa751729af35fe4e22b0b473c5b9f463b5",
+      "bytes": 715,
+      "kind": "props",
+      "local_path": "/evidence/render-0.1.1/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/props.json"
+    },
+    {
+      "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/manifest.json",
+      "sha256": "22f3c06bbc48079bfbe42f43b95ebbd8e7dbb332e27cd6ad9da7d55e629c6750",
+      "bytes": 1227,
+      "kind": "manifest",
+      "local_path": "/evidence/render-0.1.1/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/manifest.json"
+    }
+  ],
+  "operation": "compose",
+  "project_id": "smoke-test",
+  "cached": false
+}

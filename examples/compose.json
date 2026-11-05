@@ -1,0 +1,6 @@
+{
+  "input": {
+    "operation": "compose", "project_id": "demo", "idempotency_key": "compose-demo-v1",
+    "artifact_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

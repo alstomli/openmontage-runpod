@@ -1,0 +1,54 @@
+SRE review — supplied-asset prototype
+Project date: 2026-11-04 (America/New_York)
+
+Scope
+Independent failure-injection and control-plane tests in tests/reliability/test_recovery.py.
+These tests do not claim real Runpod deployment, live S3 compatibility, GPU generation,
+or narration/creative quality. Actual rendering is covered by separate container smoke evidence.
+
+Verified checks
+- Durable replay through replacement Runner and storage object.
+- Same idempotency key with changed input is rejected.
+- Missing/corrupted cached artifacts are reconstructed rather than reported intact.
+- Approval is required for the exact plan content hash; revised plans do not inherit approval.
+- Source media mutation after approval is rejected by digest.
+- Contradictory digests for the same source key are rejected.
+- Media failure releases project lock; the same request can be retried.
+- Concurrent access and crash-leftover locks fail closed.
+- Traversal and cross-project input references are rejected.
+- Unexpected exceptions do not leak exception text in the client response.
+- Array/object enum values return invalid_input.
+- S3 adapter mock checks atomic IfNoneMatch lock creation, conflict handling,
+  missing-object errors, response-body closure, and URL regeneration.
+- Installed botocore service model exposes PutObject.IfNoneMatch.
+- Pinned Runpod SDK run_job extracts handler top-level error into SDK error channel;
+  success output and metadata handling are checked separately.
+
+Defects resolved before final build
+- Initial image accepted contradictory sha256 values for one repeated source key.
+  Current schema rejects this; regression test included. Final rebuilt image must pass.
+- Media subprocess failures originally discarded diagnostic output. Developer added
+  bounded operator-side diagnostic logging while preserving a safe API error response.
+
+Operational limits
+- Locks deliberately have no automatic expiry. After hard process termination, an
+  operator must verify the old job is stopped before deleting its exact lock object.
+- Endpoint authorization is trusted single-account usage; tenant isolation/auth policy
+  beyond project-scoped storage references is not implemented.
+- For renderer/upstream changes, bump wrapper version and use fresh idempotency keys.
+  Current request receipts do not automatically invalidate across code deployments.
+  Build-fingerprint cache namespaces are a future upgrade requirement.
+- Live storage must prove conditional PutObject behavior against the chosen provider.
+- Published artifact must be the exact image that passed final tests and offline render.
+
+Evidence status
+Host reliability run: 22 discovered, 20 passed, 2 skipped because Runpod is container-only.
+Old-image SDK boundary checks: 2 passed; old image reproduced pre-fix digest defect.
+Final exact-image verification is recorded by DevOps in 005-reliability-tests.txt.
+
+Cloud release gates
+1. Exact final image passes unit, reliability, and offline supplied-asset render checks.
+2. S3 credentials configured; real conditional locking/read/write verified in target storage.
+3. Runpod CPU flavor availability, endpoint configuration, runtime limits, and cost confirmed.
+4. One live job returns durable MP4/captions; a replacement worker retries safely.
+5. Recorder captures real console/configuration/job evidence; no pending step labeled complete.
