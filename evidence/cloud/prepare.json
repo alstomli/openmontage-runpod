@@ -1,0 +1,60 @@
+{
+  "input": {
+    "operation": "prepare",
+    "project_id": "narrated-validation",
+    "idempotency_key": "cloud-prepare-v1",
+    "storyboard": {
+      "title": "How this deployment works",
+      "scenes": [
+        {
+          "text": "Approved storyboard to finished video",
+          "subtitle": "Pinned upstream code. Reproducible Linux environment.",
+          "duration": 10,
+          "image": {
+            "key": "inputs/narrated-validation/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+            "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+          }
+        },
+        {
+          "text": "Validate, approve, persist",
+          "subtitle": "Version-bound review and durable production artifacts.",
+          "duration": 10,
+          "image": {
+            "key": "inputs/narrated-validation/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+            "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+          }
+        },
+        {
+          "text": "Prove rendering before adding generation",
+          "subtitle": "Supplied speech fixture; GPU generation remains a later milestone.",
+          "duration": 10,
+          "image": {
+            "key": "inputs/narrated-validation/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+            "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+          }
+        }
+      ],
+      "narration": {
+        "key": "inputs/narrated-validation/894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3.wav",
+        "sha256": "894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3"
+      },
+      "captions": [
+        {
+          "text": "Approved storyboard, pinned OpenMontage, Linux container.",
+          "start": 0,
+          "end": 10
+        },
+        {
+          "text": "Validate inputs, check approvals, save persistent results.",
+          "start": 10,
+          "end": 20
+        },
+        {
+          "text": "Review between jobs. Verify rendering before GPU generation.",
+          "start": 20,
+          "end": 30
+        }
+      ]
+    }
+  }
+}

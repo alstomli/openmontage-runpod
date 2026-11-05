@@ -1,0 +1,75 @@
+{
+  "dry_run": true,
+  "status": "review_required_not_deployed",
+  "api": "https://rest.runpod.io/v1",
+  "template": {
+    "method": "POST",
+    "path": "/templates",
+    "body": {
+      "name": "openmontage-staging",
+      "imageName": "ghcr.io/example/openmontage@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "category": "CPU",
+      "isServerless": true,
+      "isPublic": false,
+      "containerDiskInGb": 20,
+      "env": {
+        "OPENMONTAGE_ROOT": "/opt/openmontage",
+        "WORK_ROOT": "/tmp/openmontage",
+        "COMPOSER_BROWSER_EXECUTABLE": "/usr/bin/chromium",
+        "REMOTION_CONCURRENCY": "1",
+        "STORAGE_BACKEND": "local",
+        "LOCAL_STORAGE_ROOT": "/runpod-volume/openmontage",
+        "REQUIRE_NETWORK_VOLUME": "1"
+      }
+    }
+  },
+  "endpoint": {
+    "method": "POST",
+    "path": "/endpoints",
+    "body": {
+      "name": "openmontage-staging",
+      "templateId": "<CREATED_TEMPLATE_ID>",
+      "computeType": "CPU",
+      "workersMin": 0,
+      "workersMax": 1,
+      "idleTimeout": 5,
+      "executionTimeoutMs": 1200000,
+      "scalerType": "QUEUE_DELAY",
+      "scalerValue": 4,
+      "cpuFlavorIds": [
+        "example-confirm-in-console"
+      ],
+      "vcpuCount": 4,
+      "networkVolumeId": "l34ba8wnno",
+      "dataCenterIds": [
+        "EU-RO-1"
+      ]
+    }
+  },
+  "application_concurrency": 1,
+  "storage_profile": "mounted_network_volume",
+  "required_secrets": [
+    "RUNPOD_API_KEY"
+  ],
+  "release_gates": [
+    "unit tests",
+    "container supplied-asset render",
+    "SRE review",
+    "verify persistence and input/output transfer",
+    "confirm compute availability and pricing",
+    "confirm chosen compute can attach this volume in its datacenter"
+  ],
+  "rollback": "Restore the previous verified image digest on the endpoint template; retain previous plan and smoke report.",
+  "sources": [
+    "https://docs.runpod.io/api-reference/templates/POST/templates",
+    "https://docs.runpod.io/api-reference/endpoints/POST/endpoints",
+    "https://docs.runpod.io/storage/network-volumes",
+    "https://docs.runpod.io/storage/s3-api"
+  ],
+  "storage_notes": [
+    "Only /runpod-volume/openmontage is owned by this application; do not delete or alter sibling model files.",
+    "Returned paths are worker filesystem paths, not public download URLs.",
+    "Transfer inputs/outputs through an authenticated volume file tool or Runpod S3 API; presigned URLs unsupported.",
+    "A mounted volume must be confirmed in the real worker before accepting production jobs."
+  ]
+}

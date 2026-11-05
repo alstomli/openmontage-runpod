@@ -1,0 +1,36 @@
+test_runpod_error_is_a_string_without_mutating_local_error_contract (test_worker.HandlerAdapterTests.test_runpod_error_is_a_string_without_mutating_local_error_contract) ... ok
+test_runpod_internal_error_does_not_expose_original_exception (test_worker.HandlerAdapterTests.test_runpod_internal_error_does_not_expose_original_exception) ... ok
+test_success_is_preserved_and_provider_metadata_is_ignored (test_worker.HandlerAdapterTests.test_success_is_preserved_and_provider_metadata_is_ignored) ... ok
+test_approval_does_not_transfer_to_revised_plan (test_worker.WorkerTests.test_approval_does_not_transfer_to_revised_plan) ... ok
+test_approval_requires_true_attestation (test_worker.WorkerTests.test_approval_requires_true_attestation) ... ok
+test_assets_require_separate_approval (test_worker.WorkerTests.test_assets_require_separate_approval) ... ok
+test_cannot_approve_nonexistent_artifact (test_worker.WorkerTests.test_cannot_approve_nonexistent_artifact) ... ok
+test_caption_style_markup_is_rejected_instead_of_rewritten (test_worker.WorkerTests.test_caption_style_markup_is_rejected_instead_of_rewritten) ... ok
+test_conflicting_hashes_for_same_key_are_rejected (test_worker.WorkerTests.test_conflicting_hashes_for_same_key_are_rejected) ... ok
+test_cross_project_source_is_rejected (test_worker.WorkerTests.test_cross_project_source_is_rejected) ... ok
+test_different_projects_have_independent_locks (test_worker.WorkerTests.test_different_projects_have_independent_locks) ... ok
+test_eight_scene_limit (test_worker.WorkerTests.test_eight_scene_limit) ... ok
+test_failed_stage_releases_lock_and_can_retry (test_worker.WorkerTests.test_failed_stage_releases_lock_and_can_retry) ... ok
+test_idempotent_request_returns_verified_cached_result (test_worker.WorkerTests.test_idempotent_request_returns_verified_cached_result) ... ok
+test_long_phrase_wraps_without_inventing_word_timings (test_worker.WorkerTests.test_long_phrase_wraps_without_inventing_word_timings) ... ok
+test_missing_cached_artifact_is_rebuilt (test_worker.WorkerTests.test_missing_cached_artifact_is_rebuilt) ... ok
+test_modified_stored_plan_is_detected (test_worker.WorkerTests.test_modified_stored_plan_is_detected) ... ok
+test_nan_duration_is_rejected (test_worker.WorkerTests.test_nan_duration_is_rejected) ... ok
+test_ninety_second_limit (test_worker.WorkerTests.test_ninety_second_limit) ... ok
+test_output_manifest_survives_replacement_worker (test_worker.WorkerTests.test_output_manifest_survives_replacement_worker) ... ok
+test_overlapping_captions_are_rejected (test_worker.WorkerTests.test_overlapping_captions_are_rejected) ... ok
+test_phrase_captions_use_libass_and_scene_subtitles_use_supported_component (test_worker.WorkerTests.test_phrase_captions_use_libass_and_scene_subtitles_use_supported_component) ... ok
+test_plan_requires_explicit_approval (test_worker.WorkerTests.test_plan_requires_explicit_approval) ... ok
+test_project_lock_excludes_concurrent_requests (test_worker.WorkerTests.test_project_lock_excludes_concurrent_requests) ... ok
+test_replacement_worker_resumes_from_durable_plan (test_worker.WorkerTests.test_replacement_worker_resumes_from_durable_plan) ... ok
+test_reused_key_with_changed_request_fails (test_worker.WorkerTests.test_reused_key_with_changed_request_fails) ... ok
+test_source_replacement_is_detected (test_worker.WorkerTests.test_source_replacement_is_detected) ... ok
+test_srt_preserves_supplied_timing (test_worker.WorkerTests.test_srt_preserves_supplied_timing) ... ok
+test_subtitle_reveal_must_fit_scene_duration (test_worker.WorkerTests.test_subtitle_reveal_must_fit_scene_duration) ... ok
+test_traversal_absolute_paths_and_urls_are_rejected (test_worker.WorkerTests.test_traversal_absolute_paths_and_urls_are_rejected) ... ok
+test_unknown_fields_and_plain_scripts_are_rejected (test_worker.WorkerTests.test_unknown_fields_and_plain_scripts_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.143s
+
+OK

@@ -1,0 +1,8 @@
+{
+  "input": {
+    "operation": "compose",
+    "project_id": "narrated-validation",
+    "idempotency_key": "cloud-compose-v1",
+    "artifact_hash": "e65a198cf1e3aade46567229abc8449d89d107a535eeff2ad9668fe54e21a47d"
+  }
+}

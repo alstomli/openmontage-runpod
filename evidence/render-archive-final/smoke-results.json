@@ -1,0 +1,226 @@
+{
+  "fixture_audio": "synthetic 220 Hz tone; no speech-quality claim",
+  "steps": [
+    {
+      "request": {
+        "input": {
+          "operation": "prepare",
+          "project_id": "smoke-test",
+          "idempotency_key": "smoke-0",
+          "storyboard": {
+            "title": "OpenMontage integration smoke test",
+            "scenes": [
+              {
+                "text": "OpenMontage on Runpod",
+                "subtitle": "Supplied media, reviewed versions",
+                "duration": 2,
+                "image": {
+                  "key": "inputs/smoke-test/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+                  "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+                }
+              },
+              {
+                "text": "Approved assets. Reproducible render.",
+                "duration": 2,
+                "image": {
+                  "key": "inputs/smoke-test/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+                  "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"
+                }
+              }
+            ],
+            "narration": {
+              "key": "inputs/smoke-test/30fed97cf2b340160f065ba962cc32ae249441d30661e123c3bf06854e8b7e12.wav",
+              "sha256": "30fed97cf2b340160f065ba962cc32ae249441d30661e123c3bf06854e8b7e12"
+            },
+            "captions": [
+              {
+                "text": "Synthetic test audio, not speech narration.",
+                "start": 0,
+                "end": 2
+              },
+              {
+                "text": "Supplied media integration fixture.",
+                "start": 2,
+                "end": 4
+              }
+            ]
+          }
+        }
+      },
+      "response": {
+        "status": "awaiting_approval",
+        "approval_stage": "plan",
+        "artifact_hash": "bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b",
+        "duration": 4.0,
+        "artifacts": [
+          {
+            "key": "projects/smoke-test/plans/bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b.json",
+            "sha256": "bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b",
+            "bytes": 1119,
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/plans/bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b.json"
+          }
+        ],
+        "capabilities": {
+          "supplied_assets": true,
+          "plain_script_planning": false,
+          "image_generation": false,
+          "tts_generation": false,
+          "render_runtime": "remotion",
+          "composition_mode": "templated"
+        },
+        "operation": "prepare",
+        "project_id": "smoke-test",
+        "cached": false
+      }
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "approve",
+          "project_id": "smoke-test",
+          "idempotency_key": "smoke-1",
+          "stage": "plan",
+          "artifact_hash": "bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b",
+          "approved": true
+        }
+      },
+      "response": {
+        "status": "approved",
+        "approval_stage": "plan",
+        "artifact_hash": "bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b",
+        "artifacts": [
+          {
+            "key": "projects/smoke-test/approvals/plan/bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b.json",
+            "sha256": "925dc446f7d843f8c34032ee4f9a1f3e5ecf90339b83f20be1fe406cd64f34e6",
+            "bytes": 115,
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/approvals/plan/bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b.json"
+          }
+        ],
+        "operation": "approve",
+        "project_id": "smoke-test",
+        "cached": false
+      }
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "generate_assets",
+          "project_id": "smoke-test",
+          "idempotency_key": "smoke-2",
+          "artifact_hash": "bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b"
+        }
+      },
+      "response": {
+        "status": "awaiting_approval",
+        "approval_stage": "assets",
+        "artifact_hash": "40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926",
+        "plan_hash": "bffd979201430ac46a9bec7c62a288fb69a7f58151e378c0535fc353d9503b3b",
+        "artifacts": [
+          {
+            "key": "projects/smoke-test/blobs/30fed97cf2b340160f065ba962cc32ae249441d30661e123c3bf06854e8b7e12.wav",
+            "sha256": "30fed97cf2b340160f065ba962cc32ae249441d30661e123c3bf06854e8b7e12",
+            "bytes": 128044,
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/blobs/30fed97cf2b340160f065ba962cc32ae249441d30661e123c3bf06854e8b7e12.wav"
+          },
+          {
+            "key": "projects/smoke-test/blobs/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+            "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6",
+            "bytes": 713,
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/blobs/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png"
+          },
+          {
+            "key": "projects/smoke-test/assets/40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926.json",
+            "sha256": "40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926",
+            "bytes": 794,
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/assets/40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926.json"
+          }
+        ],
+        "operation": "generate_assets",
+        "project_id": "smoke-test",
+        "cached": false
+      }
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "approve",
+          "project_id": "smoke-test",
+          "idempotency_key": "smoke-3",
+          "stage": "assets",
+          "artifact_hash": "40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926",
+          "approved": true
+        }
+      },
+      "response": {
+        "status": "approved",
+        "approval_stage": "assets",
+        "artifact_hash": "40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926",
+        "artifacts": [
+          {
+            "key": "projects/smoke-test/approvals/assets/40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926.json",
+            "sha256": "743b8f861ba14c6e01b0db4226e81b29dc6e4f2851d722c903557c991a329bd6",
+            "bytes": 117,
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/approvals/assets/40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926.json"
+          }
+        ],
+        "operation": "approve",
+        "project_id": "smoke-test",
+        "cached": false
+      }
+    },
+    {
+      "request": {
+        "input": {
+          "operation": "compose",
+          "project_id": "smoke-test",
+          "idempotency_key": "smoke-4",
+          "artifact_hash": "40af22c714ec6a70dc3693fd76598aba8bb020e71f7d8d4a05df618cbaa0a926"
+        }
+      },
+      "response": {
+        "status": "completed",
+        "artifact_hash": "45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573",
+        "artifacts": [
+          {
+            "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/final.mp4",
+            "sha256": "0f0c444629d47bece3c83e5f43bd69cfa782d76aef7ba5339437b319e506a29a",
+            "bytes": 362842,
+            "kind": "video",
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/final.mp4"
+          },
+          {
+            "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/captions.srt",
+            "sha256": "948b080f936c769c45439ccdcfa8aa50a345756cc9edc49bc4c3a2b2cb617019",
+            "bytes": 145,
+            "kind": "captions",
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/captions.srt"
+          },
+          {
+            "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/thumbnail.png",
+            "sha256": "e945707cb4b10afcd49d6933e65c3621d7ff1655ca7273ab1f2029108f38f4bb",
+            "bytes": 141920,
+            "kind": "thumbnail",
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/thumbnail.png"
+          },
+          {
+            "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/props.json",
+            "sha256": "6966deccdbc730038d0fe8262a5cc0fa751729af35fe4e22b0b473c5b9f463b5",
+            "bytes": 715,
+            "kind": "props",
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/props.json"
+          },
+          {
+            "key": "projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/manifest.json",
+            "sha256": "22f3c06bbc48079bfbe42f43b95ebbd8e7dbb332e27cd6ad9da7d55e629c6750",
+            "bytes": 1227,
+            "kind": "manifest",
+            "local_path": "/evidence/render-archive-final/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/manifest.json"
+          }
+        ],
+        "operation": "compose",
+        "project_id": "smoke-test",
+        "cached": false
+      }
+    }
+  ]
+}

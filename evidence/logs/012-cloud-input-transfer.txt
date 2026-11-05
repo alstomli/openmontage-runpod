@@ -1,0 +1,1 @@
+{"uploaded_objects": 2, "read_back_verified": true, "existing_files_deleted": false, "request_file": "/evidence/cloud/prepare.json"}

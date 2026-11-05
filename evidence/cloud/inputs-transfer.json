@@ -1,0 +1,19 @@
+{
+  "bucket": "l34ba8wnno",
+  "prefix": "openmontage/",
+  "objects": [
+    {
+      "key": "openmontage/inputs/narrated-validation/894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3.wav",
+      "bytes": 1297002,
+      "sha256": "894506dd9cd5af461cdd37a9b215b6f9467dc714b322d860f7928b281c1a80b3",
+      "read_back_verified": true
+    },
+    {
+      "key": "openmontage/inputs/narrated-validation/09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6.png",
+      "bytes": 713,
+      "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6",
+      "read_back_verified": true
+    }
+  ],
+  "existing_files_deleted": false
+}

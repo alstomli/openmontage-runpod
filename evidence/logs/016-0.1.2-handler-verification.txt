@@ -1,0 +1,15 @@
+Application0.1.2 packaged handler verification:PASS
+Build:docker build --platform linux/amd64 -t openmontage-worker:local --progress plain .
+Build log:docker-worker-0.1.2-build.log
+Exact local image ID:sha256:88cc4fe198b518659ca0450ce07e9f1a9aa1691f4a814aec3c527dfaaaf66252
+Installed package version:0.1.2
+Packaged handler SHA256:60e30a9a889d24d2a43dd9ba4ba7559cf2228748109cd292c20b94ccec52ab16
+Packaged media.py SHA256:e0e18558bf64f5e6331f2d3360d2a281a431bf908cb843fc43eef894c806fa39
+31unit tests PASS,23reliability tests PASS, zero skips. Exact packaged image; --network none; no source/test mounts.
+Commands:docker run --rm --network none --entrypoint python openmontage-worker:local -m unittest discover -s tests/unit -v
+         docker run --rm --network none --entrypoint python openmontage-worker:local -m unittest discover -s tests/reliability -v
+Full logs:unit-0.1.2-tests.txt,sre-0.1.2-tests.txt.
+Regression:handler returns sanitized {code,message} serialized as a JSON STRING in the platform error channel. Local execute still returns structured error dict. Success adapter unchanged.
+Wire test follows Runpod1.7.13 rp_job.handle_job -> rp_http.send_result -> _handle_result and captures serialized JSON at mocked _transmit. Error must be a string that decodes exactly safe code/message, with no traceback.
+No cloud calls were made by these checks. Successful local SDK wire tests do not establish the live Runpod final status; live negative/prepare retest remains root release gate.
+Rendering engine unchanged from live0.1.1 commit95f5ecd (media.py has no diff); expensive media render intentionally not repeated. Prior cloud video/download/hash evidence retains its0.1.1version attribution.

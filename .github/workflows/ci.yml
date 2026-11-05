@@ -1,0 +1,39 @@
+name: Verify worker
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Verify upstream pin
+        run: python scripts/verify_upstream.py
+      - uses: docker/setup-buildx-action@v3
+      - name: Build Linux worker
+        run: docker build --platform linux/amd64 -t openmontage-worker:ci .
+      - name: Unit and reliability tests
+        run: |
+          docker run --rm --entrypoint python openmontage-worker:ci -m unittest discover -s tests/unit -v
+          docker run --rm --entrypoint python openmontage-worker:ci -m unittest discover -s tests/reliability -v
+      - name: Supplied-asset integration render
+        run: |
+          mkdir -p evidence/ci
+          docker run --rm --network none --shm-size=1g -v "$PWD/evidence/ci:/evidence" --entrypoint python openmontage-worker:ci scripts/client.py smoke --output /evidence
+      - name: Missing persistent volume fails closed
+        run: |
+          if docker run --rm --network none -e REQUIRE_NETWORK_VOLUME=1 --entrypoint python openmontage-worker:ci scripts/start_worker.py --check-only; then
+            echo "Required missing volume was incorrectly accepted"
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: render-evidence
+          path: evidence/ci

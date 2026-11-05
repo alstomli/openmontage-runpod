@@ -1,0 +1,56 @@
+{"event": "stage_started", "operation": "prepare", "project_id": "smoke-test"}
+{"elapsed_seconds": 0.094, "event": "stage_completed", "operation": "prepare", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "approve", "project_id": "smoke-test"}
+{"elapsed_seconds": 0.131, "event": "stage_completed", "operation": "approve", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "generate_assets", "project_id": "smoke-test"}
+{"event": "asset_staged", "kind": "narration", "project_id": "smoke-test", "sha256": "30fed97cf2b340160f065ba962cc32ae249441d30661e123c3bf06854e8b7e12"}
+{"event": "asset_staged", "kind": "image", "project_id": "smoke-test", "sha256": "09da8ee79b0332412a1ad85f5a458c5e373e030ce2683024824ed17b6d3f60e6"}
+{"elapsed_seconds": 0.403, "event": "stage_completed", "operation": "generate_assets", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "approve", "project_id": "smoke-test"}
+{"elapsed_seconds": 0.181, "event": "stage_completed", "operation": "approve", "project_id": "smoke-test"}
+{"event": "stage_started", "operation": "compose", "project_id": "smoke-test"}
+{"elapsed_seconds": 36.749, "event": "stage_completed", "operation": "compose", "project_id": "smoke-test"}
+{
+  "status": "completed",
+  "artifact_hash": "7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2",
+  "artifacts": [
+    {
+      "key": "projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/final.mp4",
+      "sha256": "e9d10cb26885c70c6f96d87c29db15a846d8a4208a7051828755fad1f6ee2b2a",
+      "bytes": 500093,
+      "kind": "video",
+      "local_path": "/evidence/render-smoke/storage/projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/final.mp4"
+    },
+    {
+      "key": "projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/captions.srt",
+      "sha256": "f17f88f658fe3c5e3d4ddfa272224ca1fc681f46185862f640b369ec55ed9839",
+      "bytes": 145,
+      "kind": "captions",
+      "local_path": "/evidence/render-smoke/storage/projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/captions.srt"
+    },
+    {
+      "key": "projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/thumbnail.png",
+      "sha256": "35276f2735ecd924e6c02186777ac196cca7b765928cab48d3a3fd8715455fee",
+      "bytes": 182489,
+      "kind": "thumbnail",
+      "local_path": "/evidence/render-smoke/storage/projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/thumbnail.png"
+    },
+    {
+      "key": "projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/props.json",
+      "sha256": "d71faa0099c798d7d3e328819fd5fe50b541b7c1b2959e1f00733226e5fc1387",
+      "bytes": 879,
+      "kind": "props",
+      "local_path": "/evidence/render-smoke/storage/projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/props.json"
+    },
+    {
+      "key": "projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/manifest.json",
+      "sha256": "b87edac3a39d77dac11e0878e8211b4ad6120d1de2887de7dbe39d4e3fa06732",
+      "bytes": 1140,
+      "kind": "manifest",
+      "local_path": "/evidence/render-smoke/storage/projects/smoke-test/renders/7a1fa71f8d5d4456dbf83ac36d86cae279f52d59b0a8ea31c9d720fd71abe2e2/manifest.json"
+    }
+  ],
+  "operation": "compose",
+  "project_id": "smoke-test",
+  "cached": false
+}

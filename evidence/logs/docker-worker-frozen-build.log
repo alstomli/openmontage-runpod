@@ -1,0 +1,495 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.91kB 0.0s done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1.7
+#2 DONE 0.3s
+
+#3 docker-image://docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
+#3 resolve docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e 0.0s done
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/node:22.14.0-bookworm-slim@sha256:1c18d9ab3af4585870b92e4dbc5cac5a0dc77dd13df1a5905cea89fc720eb05b
+#4 DONE 0.1s
+
+#5 [internal] load metadata for docker.io/library/python:3.11.11-slim-bookworm@sha256:081075da77b2b55c23c088251026fb69a7b2bf92471e491ff5fd75c192fd38e5
+#5 DONE 0.1s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 229B done
+#6 DONE 0.0s
+
+#7 [node 1/1] FROM docker.io/library/node:22.14.0-bookworm-slim@sha256:1c18d9ab3af4585870b92e4dbc5cac5a0dc77dd13df1a5905cea89fc720eb05b
+#7 resolve docker.io/library/node:22.14.0-bookworm-slim@sha256:1c18d9ab3af4585870b92e4dbc5cac5a0dc77dd13df1a5905cea89fc720eb05b 0.1s done
+#7 DONE 0.1s
+
+#8 [media-base 1/7] FROM docker.io/library/python:3.11.11-slim-bookworm@sha256:081075da77b2b55c23c088251026fb69a7b2bf92471e491ff5fd75c192fd38e5
+#8 resolve docker.io/library/python:3.11.11-slim-bookworm@sha256:081075da77b2b55c23c088251026fb69a7b2bf92471e491ff5fd75c192fd38e5 0.1s done
+#8 DONE 0.1s
+
+#9 [internal] load build context
+#9 transferring context: 262.72kB 0.1s done
+#9 DONE 0.2s
+
+#10 [media-base 5/7] WORKDIR /opt/openmontage/remotion-composer
+#10 CACHED
+
+#11 [media-base 6/7] COPY vendor/OpenMontage/remotion-composer/package*.json ./
+#11 CACHED
+
+#12 [runtime 1/9] COPY vendor/OpenMontage /opt/openmontage
+#12 CACHED
+
+#13 [runtime 2/9] COPY UPSTREAM.json /opt/upstream.json
+#13 CACHED
+
+#14 [runtime 3/9] WORKDIR /app
+#14 CACHED
+
+#15 [media-base 7/7] RUN npm ci --no-audit --no-fund
+#15 CACHED
+
+#16 [media-base 2/7] COPY --from=node /usr/local/bin/node /usr/local/bin/node
+#16 CACHED
+
+#17 [media-base 3/7] COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+#17 CACHED
+
+#18 [media-base 4/7] RUN ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm  && ln -s ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx  && apt-get update  && apt-get install -y --no-install-recommends chromium ffmpeg fonts-dejavu-core fonts-liberation ca-certificates  && rm -rf /var/lib/apt/lists/*
+#18 CACHED
+
+#19 [runtime 4/9] COPY requirements.txt pyproject.toml ./
+#19 CACHED
+
+#20 [runtime 5/9] COPY openmontage_worker ./openmontage_worker
+#20 DONE 0.1s
+
+#21 [runtime 6/9] COPY handler.py ./
+#21 DONE 0.1s
+
+#22 [runtime 7/9] RUN python -m pip install --no-cache-dir -e .  && mkdir -p /data/openmontage /inputs /tmp/openmontage  && dpkg-query -W > /opt/system-packages.txt  && python -m pip freeze > /opt/python-packages.txt
+#22 1.538 Obtaining file:///app
+#22 1.541   Installing build dependencies: started
+#22 4.595   Installing build dependencies: finished with status 'done'
+#22 4.596   Checking if build backend supports build_editable: started
+#22 4.981   Checking if build backend supports build_editable: finished with status 'done'
+#22 4.982   Getting requirements to build editable: started
+#22 5.442   Getting requirements to build editable: finished with status 'done'
+#22 5.444   Preparing editable metadata (pyproject.toml): started
+#22 5.948   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#22 6.161 Collecting runpod==1.7.13 (from openmontage-runpod==0.1.0)
+#22 6.279   Downloading runpod-1.7.13-py3-none-any.whl.metadata (7.6 kB)
+#22 6.795 Collecting boto3==1.35.99 (from openmontage-runpod==0.1.0)
+#22 6.826   Downloading boto3-1.35.99-py3-none-any.whl.metadata (6.7 kB)
+#22 7.328 Collecting botocore<1.36.0,>=1.35.99 (from boto3==1.35.99->openmontage-runpod==0.1.0)
+#22 7.359   Downloading botocore-1.35.99-py3-none-any.whl.metadata (5.7 kB)
+#22 7.405 Collecting jmespath<2.0.0,>=0.7.1 (from boto3==1.35.99->openmontage-runpod==0.1.0)
+#22 7.440   Downloading jmespath-1.1.0-py3-none-any.whl.metadata (7.6 kB)
+#22 7.499 Collecting s3transfer<0.11.0,>=0.10.0 (from boto3==1.35.99->openmontage-runpod==0.1.0)
+#22 7.522   Downloading s3transfer-0.10.4-py3-none-any.whl.metadata (1.7 kB)
+#22 8.169 Collecting aiohttp>=3.9.3 (from aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 8.199   Downloading aiohttp-3.14.5-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.3 kB)
+#22 8.252 Collecting aiohttp-retry>=2.8.3 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 8.282   Downloading aiohttp_retry-2.9.1-py3-none-any.whl.metadata (8.8 kB)
+#22 8.341 Collecting backoff>=2.2.1 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 8.367   Downloading backoff-2.2.1-py3-none-any.whl.metadata (14 kB)
+#22 8.483 Collecting click>=8.1.7 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 8.512   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#22 8.572 Collecting colorama<0.4.7,>=0.2.5 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 8.598   Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+#22 8.838 Collecting cryptography<46.0.0 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 8.864   Downloading cryptography-45.0.7-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+#22 8.985 Collecting fastapi>=0.94.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.018   Downloading fastapi-0.162.0-py3-none-any.whl.metadata (26 kB)
+#22 9.170 Collecting filelock>=3.0.0 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.202   Downloading filelock-4.2.9-py3-none-any.whl.metadata (2.3 kB)
+#22 9.268 Collecting paramiko>=3.3.1 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.297   Downloading paramiko-5.1.0-py3-none-any.whl.metadata (3.8 kB)
+#22 9.358 Collecting prettytable>=3.9.0 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.383   Downloading prettytable-3.18.0-py3-none-any.whl.metadata (37 kB)
+#22 9.443 Collecting py-cpuinfo>=9.0.0 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.477   Downloading py_cpuinfo-9.0.0-py3-none-any.whl.metadata (794 bytes)
+#22 9.527 Collecting inquirerpy==0.3.4 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.563   Downloading InquirerPy-0.3.4-py3-none-any.whl.metadata (8.1 kB)
+#22 9.634 Collecting requests>=2.31.0 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.663   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+#22 9.760 Collecting tomli>=2.0.1 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.783   Downloading tomli-2.5.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (10 kB)
+#22 9.878 Collecting tomlkit>=0.12.2 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 9.910   Downloading tomlkit-0.15.2-py3-none-any.whl.metadata (3.4 kB)
+#22 9.983 Collecting tqdm-loggable>=0.1.4 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.02   Downloading tqdm_loggable-0.4.1-py3-none-any.whl.metadata (10 kB)
+#22 10.11 Collecting urllib3>=1.26.6 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.13   Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+#22 10.22 Collecting watchdog>=3.0.0 (from runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.25   Downloading watchdog-7.0.0-py3-none-manylinux_2_17_x86_64.whl.metadata (60 kB)
+#22 10.26      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.7/60.7 kB 13.2 MB/s eta 0:00:00
+#22 10.31 Collecting pfzy<0.4.0,>=0.3.1 (from inquirerpy==0.3.4->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.34   Downloading pfzy-0.3.4-py3-none-any.whl.metadata (4.9 kB)
+#22 10.41 Collecting prompt-toolkit<4.0.0,>=3.0.1 (from inquirerpy==0.3.4->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.44   Downloading prompt_toolkit-3.0.53-py3-none-any.whl.metadata (6.4 kB)
+#22 10.51 Collecting aiohappyeyeballs>=2.5.0 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.53   Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl.metadata (5.9 kB)
+#22 10.58 Collecting aiosignal>=1.4.0 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.61   Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+#22 10.67 Collecting attrs>=17.3.0 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.70   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+#22 10.80 Collecting frozenlist>=1.1.1 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 10.83   Downloading frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+#22 11.18 Collecting multidict<8.0,>=4.5 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 11.20   Downloading multidict-7.2.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (6.1 kB)
+#22 11.31 Collecting propcache>=0.2.0 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 11.34   Downloading propcache-0.5.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (25 kB)
+#22 11.41 Collecting typing_extensions>=4.4 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 11.46   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#22 11.73 Collecting yarl<2.0,>=1.25.1 (from aiohttp>=3.9.3->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 11.77   Downloading yarl-1.25.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (111 kB)
+#22 11.78      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.6/111.6 kB 15.3 MB/s eta 0:00:00
+#22 11.84 Collecting aiodns>=3.3.0 (from aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 11.86   Downloading aiodns-4.0.4-py3-none-any.whl.metadata (9.0 kB)
+#22 11.94 Collecting Brotli>=1.2 (from aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 11.97   Downloading brotli-1.2.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.1 kB)
+#22 12.07 Collecting backports.zstd (from aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 12.09   Downloading backports_zstd-1.8.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (6.8 kB)
+#22 12.15 Collecting python-dateutil<3.0.0,>=2.1 (from botocore<1.36.0,>=1.35.99->boto3==1.35.99->openmontage-runpod==0.1.0)
+#22 12.17   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#22 12.45 Collecting cffi>=1.14 (from cryptography<46.0.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 12.48   Downloading cffi-2.1.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+#22 12.58 Collecting starlette>=0.46.0 (from fastapi>=0.94.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 12.62   Downloading starlette-1.10.0-py3-none-any.whl.metadata (6.6 kB)
+#22 12.79 Collecting pydantic>=2.9.0 (from fastapi>=0.94.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 12.82   Downloading pydantic-2.14.2-py3-none-any.whl.metadata (137 kB)
+#22 12.84      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.6/137.6 kB 14.7 MB/s eta 0:00:00
+#22 12.90 Collecting typing-inspection>=0.4.2 (from fastapi>=0.94.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 12.93   Downloading typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+#22 12.98 Collecting annotated-doc>=0.0.2 (from fastapi>=0.94.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.01   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#22 13.07 Collecting opentelemetry-api>=1.44.0 (from fastapi>=0.94.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.10   Downloading opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)
+#22 13.19 Collecting opentelemetry-sdk>=1.44.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.23   Downloading opentelemetry_sdk-1.45.2-py3-none-any.whl.metadata (1.6 kB)
+#22 13.28 Collecting opentelemetry-exporter-otlp-proto-http>=1.44.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.31   Downloading opentelemetry_exporter_otlp_proto_http-1.45.2-py3-none-any.whl.metadata (3.0 kB)
+#22 13.35 Collecting fastapi-cli>=0.0.32 (from fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.39   Downloading fastapi_cli-0.0.32-py3-none-any.whl.metadata (6.7 kB)
+#22 13.46 Collecting httpx<1.0.0,>=0.23.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.48   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#22 13.53 Collecting httpx2>=2.0.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.55   Downloading httpx2-2.16.0-py3-none-any.whl.metadata (10 kB)
+#22 13.60 Collecting jinja2>=3.1.5 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.63   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#22 13.68 Collecting python-multipart>=0.0.18 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.70   Downloading python_multipart-0.0.33-py3-none-any.whl.metadata (6.3 kB)
+#22 13.75 Collecting itsdangerous>=1.1.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.79   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#22 13.86 Collecting pyyaml>=5.3.1 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.88   Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#22 13.94 Collecting email-validator>=2.0.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 13.97   Downloading email_validator-2.3.0-py3-none-any.whl.metadata (26 kB)
+#22 14.05 Collecting uvicorn>=0.12.0 (from uvicorn[standard]>=0.12.0; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.07   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+#22 14.13 Collecting pydantic-settings>=2.0.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.15   Downloading pydantic_settings-2.16.2-py3-none-any.whl.metadata (4.0 kB)
+#22 14.20 Collecting pydantic-extra-types>=2.0.0 (from fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.23   Downloading pydantic_extra_types-2.11.1-py3-none-any.whl.metadata (4.2 kB)
+#22 14.31 Collecting bcrypt>=3.2 (from paramiko>=3.3.1->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.34   Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (10 kB)
+#22 14.41 Collecting invoke>=2.0 (from paramiko>=3.3.1->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.44   Downloading invoke-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#22 14.50 Collecting pynacl>=1.5 (from paramiko>=3.3.1->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.52   Downloading pynacl-1.6.2-cp38-abi3-manylinux_2_34_x86_64.whl.metadata (10.0 kB)
+#22 14.58 Collecting wcwidth>=0.3.5 (from prettytable>=3.9.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.61   Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+#22 14.82 Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.85   Downloading charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+#22 14.86      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.4/46.4 kB 4.4 MB/s eta 0:00:00
+#22 14.91 Collecting idna<4,>=2.5 (from requests>=2.31.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 14.94   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#22 15.01 Collecting certifi>=2023.5.7 (from requests>=2.31.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 15.06   Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+#22 15.27 Collecting tqdm>4.64 (from tqdm-loggable>=0.1.4->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 15.30   Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+#22 15.31      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 4.6 MB/s eta 0:00:00
+#22 15.46 Collecting pycares<6,>=5.0.0 (from aiodns>=3.3.0->aiohttp[speedups]>=3.9.3->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 15.49   Downloading pycares-5.2.1-cp311-cp311-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (4.1 kB)
+#22 15.70 Collecting pycparser (from cffi>=1.14->cryptography<46.0.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 15.73   Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+#22 15.80 Collecting dnspython>=2.0.0 (from email-validator>=2.0.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 15.82   Downloading dnspython-2.9.2-py3-none-any.whl.metadata (5.8 kB)
+#22 15.90 Collecting typer>=0.16.0 (from fastapi-cli>=0.0.32->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 15.93   Downloading typer-0.27.3-py3-none-any.whl.metadata (16 kB)
+#22 16.01 Collecting rich-toolkit>=0.14.8 (from fastapi-cli>=0.0.32->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.06   Downloading rich_toolkit-0.20.6-py3-none-any.whl.metadata (3.0 kB)
+#22 16.12 Collecting fastapi-cloud-cli>=0.1.1 (from fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.15   Downloading fastapi_cloud_cli-0.26.0-py3-none-any.whl.metadata (3.1 kB)
+#22 16.23 Collecting anyio (from httpx<1.0.0,>=0.23.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.26   Downloading anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)
+#22 16.32 Collecting httpcore==1.* (from httpx<1.0.0,>=0.23.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.35   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#22 16.41 Collecting h11>=0.16 (from httpcore==1.*->httpx<1.0.0,>=0.23.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.44   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#22 16.51 Collecting httpcore2==2.16.0 (from httpx2>=2.0.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.54   Downloading httpcore2-2.16.0-py3-none-any.whl.metadata (27 kB)
+#22 16.59 Collecting truststore>=0.10 (from httpx2>=2.0.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.62   Downloading truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+#22 16.75 Collecting MarkupSafe>=2.0 (from jinja2>=3.1.5->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.77   Downloading markupsafe-3.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#22 16.87 Collecting googleapis-common-protos~=1.52 (from opentelemetry-exporter-otlp-proto-http>=1.44.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.89   Downloading googleapis_common_protos-1.76.0-py3-none-any.whl.metadata (8.5 kB)
+#22 16.95 Collecting opentelemetry-exporter-http-transport==0.66b2 (from opentelemetry-exporter-http-transport[requests]==0.66b2->opentelemetry-exporter-otlp-proto-http>=1.44.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 16.98   Downloading opentelemetry_exporter_http_transport-0.66b2-py3-none-any.whl.metadata (2.3 kB)
+#22 17.03 Collecting opentelemetry-exporter-otlp-common==0.66b2 (from opentelemetry-exporter-otlp-proto-http>=1.44.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 17.06   Downloading opentelemetry_exporter_otlp_common-0.66b2-py3-none-any.whl.metadata (1.9 kB)
+#22 17.11 Collecting opentelemetry-exporter-otlp-proto-common==1.45.2 (from opentelemetry-exporter-otlp-proto-http>=1.44.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 17.14   Downloading opentelemetry_exporter_otlp_proto_common-1.45.2-py3-none-any.whl.metadata (1.8 kB)
+#22 17.20 Collecting opentelemetry-proto==1.45.2 (from opentelemetry-exporter-otlp-proto-http>=1.44.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 17.23   Downloading opentelemetry_proto-1.45.2-py3-none-any.whl.metadata (2.3 kB)
+#22 17.48 Collecting protobuf<8.0,>=5.0 (from opentelemetry-proto==1.45.2->opentelemetry-exporter-otlp-proto-http>=1.44.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 17.51   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+#22 17.57 Collecting opentelemetry-semantic-conventions==0.66b2 (from opentelemetry-sdk>=1.44.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 17.60   Downloading opentelemetry_semantic_conventions-0.66b2-py3-none-any.whl.metadata (2.4 kB)
+#22 17.69 Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi>=0.94.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 17.72   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#22 18.52 Collecting pydantic-core==2.50.2 (from pydantic>=2.9.0->fastapi>=0.94.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 18.54   Downloading pydantic_core-2.50.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.5 kB)
+#22 18.69 Collecting python-dotenv>=1.2.2 (from pydantic-settings>=2.0.0->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 18.72   Downloading python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+#22 18.78 Collecting six>=1.5 (from python-dateutil<3.0.0,>=2.1->botocore<1.36.0,>=1.35.99->boto3==1.35.99->openmontage-runpod==0.1.0)
+#22 18.81   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#22 18.98 Collecting httptools>=0.8.0 (from uvicorn[standard]>=0.12.0; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 19.01   Downloading httptools-0.9.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#22 19.09 Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.12.0; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 19.13   Downloading uvloop-0.23.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.1 kB)
+#22 19.29 Collecting watchfiles>=0.20 (from uvicorn[standard]>=0.12.0; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 19.34   Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#22 19.52 Collecting websockets>=13.0 (from uvicorn[standard]>=0.12.0; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 19.54   Downloading websockets-17.4-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+#22 19.82 Collecting rignore>=0.5.1 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 19.85   Downloading rignore-0.8.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+#22 19.96 Collecting sentry-sdk>=2.20.0 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 19.99   Downloading sentry_sdk-2.73.0-py3-none-any.whl.metadata (11 kB)
+#22 20.15 Collecting fastar>=0.10.0 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 20.18   Downloading fastar-0.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+#22 20.23 Collecting detect-installer>=0.1.0 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 20.25   Downloading detect_installer-0.2.1-py3-none-any.whl.metadata (1.2 kB)
+#22 20.31 Collecting agent-detector>=1.1.0 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 20.34   Downloading agent_detector-2.0.0-py3-none-any.whl.metadata (6.6 kB)
+#22 20.54 Collecting rich>=13.7.1 (from rich-toolkit>=0.14.8->fastapi-cli>=0.0.32->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 20.59   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+#22 20.90 Collecting shellingham>=1.3.0 (from typer>=0.16.0->fastapi-cli>=0.0.32->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 20.93   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+#22 21.10 Collecting markdown-it-py>=2.2.0 (from rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.32->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 21.13   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+#22 21.19 Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.32->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 21.22   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+#22 21.37 Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.32->fastapi-cli[standard]>=0.0.32; extra == "all"->fastapi[all]>=0.94.0->runpod==1.7.13->openmontage-runpod==0.1.0)
+#22 21.40   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+#22 21.46 Downloading boto3-1.35.99-py3-none-any.whl (139 kB)
+#22 21.48    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 139.2/139.2 kB 13.1 MB/s eta 0:00:00
+#22 21.50 Downloading runpod-1.7.13-py3-none-any.whl (154 kB)
+#22 21.51    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 154.6/154.6 kB 19.1 MB/s eta 0:00:00
+#22 21.54 Downloading InquirerPy-0.3.4-py3-none-any.whl (67 kB)
+#22 21.55    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.7/67.7 kB 19.2 MB/s eta 0:00:00
+#22 21.58 Downloading aiohttp-3.14.5-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.9 MB)
+#22 21.72    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 13.3 MB/s eta 0:00:00
+#22 21.75 Downloading aiohttp_retry-2.9.1-py3-none-any.whl (10.0 kB)
+#22 21.77 Downloading backoff-2.2.1-py3-none-any.whl (15 kB)
+#22 21.80 Downloading botocore-1.35.99-py3-none-any.whl (13.3 MB)
+#22 22.66    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 14.7 MB/s eta 0:00:00
+#22 22.69 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#22 22.69    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 125.3/125.3 kB 30.3 MB/s eta 0:00:00
+#22 22.72 Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+#22 22.75 Downloading cryptography-45.0.7-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+#22 23.04    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 15.3 MB/s eta 0:00:00
+#22 23.06 Downloading fastapi-0.162.0-py3-none-any.whl (148 kB)
+#22 23.08    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 148.9/148.9 kB 9.6 MB/s eta 0:00:00
+#22 23.11 Downloading filelock-4.2.9-py3-none-any.whl (164 kB)
+#22 23.11    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 164.7/164.7 kB 30.5 MB/s eta 0:00:00
+#22 23.14 Downloading jmespath-1.1.0-py3-none-any.whl (20 kB)
+#22 23.17 Downloading paramiko-5.1.0-py3-none-any.whl (211 kB)
+#22 23.18    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 211.6/211.6 kB 21.8 MB/s eta 0:00:00
+#22 23.21 Downloading prettytable-3.18.0-py3-none-any.whl (37 kB)
+#22 23.25 Downloading py_cpuinfo-9.0.0-py3-none-any.whl (22 kB)
+#22 23.29 Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+#22 23.30    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.1/73.1 kB 8.9 MB/s eta 0:00:00
+#22 23.33 Downloading s3transfer-0.10.4-py3-none-any.whl (83 kB)
+#22 23.34    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.2/83.2 kB 23.5 MB/s eta 0:00:00
+#22 23.37 Downloading tomli-2.5.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (276 kB)
+#22 23.39    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 276.4/276.4 kB 16.2 MB/s eta 0:00:00
+#22 23.42 Downloading tomlkit-0.15.2-py3-none-any.whl (52 kB)
+#22 23.42    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 52.2/52.2 kB 79.0 MB/s eta 0:00:00
+#22 23.46 Downloading tqdm_loggable-0.4.1-py3-none-any.whl (10 kB)
+#22 23.49 Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+#22 23.50    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.7/135.7 kB 15.6 MB/s eta 0:00:00
+#22 23.52 Downloading watchdog-7.0.0-py3-none-manylinux_2_17_x86_64.whl (102 kB)
+#22 23.53    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 23.8 MB/s eta 0:00:00
+#22 23.56 Downloading aiodns-4.0.4-py3-none-any.whl (12 kB)
+#22 23.59 Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl (15 kB)
+#22 23.62 Downloading aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+#22 23.65 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#22 23.69 Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+#22 23.69    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.5/67.5 kB 22.8 MB/s eta 0:00:00
+#22 23.72 Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+#22 23.73    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 278.2/278.2 kB 24.3 MB/s eta 0:00:00
+#22 23.76 Downloading brotli-1.2.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.4 MB)
+#22 23.87    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 14.3 MB/s eta 0:00:00
+#22 23.91 Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+#22 23.93    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.1/135.1 kB 5.5 MB/s eta 0:00:00
+#22 23.96 Downloading cffi-2.1.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (217 kB)
+#22 23.97    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 217.8/217.8 kB 18.8 MB/s eta 0:00:00
+#22 24.00 Downloading charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (269 kB)
+#22 24.02    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 270.0/270.0 kB 15.1 MB/s eta 0:00:00
+#22 24.05 Downloading email_validator-2.3.0-py3-none-any.whl (35 kB)
+#22 24.09 Downloading fastapi_cli-0.0.32-py3-none-any.whl (14 kB)
+#22 24.13 Downloading frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (231 kB)
+#22 24.16    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 231.1/231.1 kB 11.8 MB/s eta 0:00:00
+#22 24.18 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#22 24.19    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 75.7 MB/s eta 0:00:00
+#22 24.22 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#22 24.24    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 3.8 MB/s eta 0:00:00
+#22 24.27 Downloading httpx2-2.16.0-py3-none-any.whl (97 kB)
+#22 24.28    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 18.8 MB/s eta 0:00:00
+#22 24.31 Downloading httpcore2-2.16.0-py3-none-any.whl (85 kB)
+#22 24.33    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.1/85.1 kB 6.4 MB/s eta 0:00:00
+#22 24.36 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#22 24.37    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.6/69.6 kB 15.8 MB/s eta 0:00:00
+#22 24.40 Downloading invoke-3.0.3-py3-none-any.whl (160 kB)
+#22 24.44    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 161.0/161.0 kB 5.6 MB/s eta 0:00:00
+#22 24.48 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#22 24.51 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#22 24.54    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 7.1 MB/s eta 0:00:00
+#22 24.56 Downloading multidict-7.2.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (510 kB)
+#22 24.60    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 510.1/510.1 kB 15.8 MB/s eta 0:00:00
+#22 24.71 Downloading opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)
+#22 24.75    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.3/60.3 kB 1.7 MB/s eta 0:00:00
+#22 24.78 Downloading opentelemetry_exporter_otlp_proto_http-1.45.2-py3-none-any.whl (22 kB)
+#22 24.81 Downloading opentelemetry_exporter_http_transport-0.66b2-py3-none-any.whl (12 kB)
+#22 24.83 Downloading opentelemetry_exporter_otlp_common-0.66b2-py3-none-any.whl (12 kB)
+#22 24.86 Downloading opentelemetry_exporter_otlp_proto_common-1.45.2-py3-none-any.whl (15 kB)
+#22 24.89 Downloading opentelemetry_proto-1.45.2-py3-none-any.whl (72 kB)
+#22 24.90    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.5/72.5 kB 21.1 MB/s eta 0:00:00
+#22 24.93 Downloading opentelemetry_sdk-1.45.2-py3-none-any.whl (141 kB)
+#22 24.94    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 141.8/141.8 kB 27.6 MB/s eta 0:00:00
+#22 24.97 Downloading opentelemetry_semantic_conventions-0.66b2-py3-none-any.whl (206 kB)
+#22 24.98    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 206.3/206.3 kB 25.6 MB/s eta 0:00:00
+#22 25.01 Downloading pfzy-0.3.4-py3-none-any.whl (8.5 kB)
+#22 25.03 Downloading prompt_toolkit-3.0.53-py3-none-any.whl (392 kB)
+#22 25.06    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 392.3/392.3 kB 15.4 MB/s eta 0:00:00
+#22 25.09 Downloading propcache-0.5.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (235 kB)
+#22 25.11    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 235.4/235.4 kB 12.8 MB/s eta 0:00:00
+#22 25.13 Downloading pydantic-2.14.2-py3-none-any.whl (490 kB)
+#22 25.15    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 490.4/490.4 kB 29.9 MB/s eta 0:00:00
+#22 25.17 Downloading pydantic_core-2.50.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.2 MB)
+#22 25.31    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 16.5 MB/s eta 0:00:00
+#22 25.34 Downloading pydantic_extra_types-2.11.1-py3-none-any.whl (79 kB)
+#22 25.34    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.5/79.5 kB 22.7 MB/s eta 0:00:00
+#22 25.37 Downloading pydantic_settings-2.16.2-py3-none-any.whl (81 kB)
+#22 25.38    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.0/82.0 kB 9.5 MB/s eta 0:00:00
+#22 25.42 Downloading pynacl-1.6.2-cp38-abi3-manylinux_2_34_x86_64.whl (1.4 MB)
+#22 25.50    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 16.9 MB/s eta 0:00:00
+#22 25.53 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#22 25.54    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 18.0 MB/s eta 0:00:00
+#22 25.57 Downloading python_multipart-0.0.33-py3-none-any.whl (32 kB)
+#22 25.60 Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (806 kB)
+#22 25.63    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 806.6/806.6 kB 28.5 MB/s eta 0:00:00
+#22 25.67 Downloading starlette-1.10.0-py3-none-any.whl (80 kB)
+#22 25.67    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.6/80.6 kB 68.5 MB/s eta 0:00:00
+#22 25.69 Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+#22 25.70    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 16.5 MB/s eta 0:00:00
+#22 25.73 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#22 25.74    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 11.7 MB/s eta 0:00:00
+#22 25.77 Downloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+#22 25.79 Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+#22 25.80    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.4/87.4 kB 14.9 MB/s eta 0:00:00
+#22 25.83 Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (785 kB)
+#22 25.89    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 785.9/785.9 kB 15.1 MB/s eta 0:00:00
+#22 25.91 Downloading yarl-1.25.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (117 kB)
+#22 25.92    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.7/117.7 kB 16.2 MB/s eta 0:00:00
+#22 25.95 Downloading backports_zstd-1.8.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (493 kB)
+#22 25.97    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 493.8/493.8 kB 21.8 MB/s eta 0:00:00
+#22 26.01 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#22 26.05 Downloading anyio-4.16.0-py3-none-any.whl (134 kB)
+#22 26.06    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.5/134.5 kB 20.0 MB/s eta 0:00:00
+#22 26.09 Downloading dnspython-2.9.2-py3-none-any.whl (360 kB)
+#22 26.12    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 360.5/360.5 kB 12.8 MB/s eta 0:00:00
+#22 26.15 Downloading fastapi_cloud_cli-0.26.0-py3-none-any.whl (108 kB)
+#22 26.16    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.7/108.7 kB 30.2 MB/s eta 0:00:00
+#22 26.18 Downloading googleapis_common_protos-1.76.0-py3-none-any.whl (307 kB)
+#22 26.21    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 307.7/307.7 kB 16.3 MB/s eta 0:00:00
+#22 26.24 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#22 26.27 Downloading httptools-0.9.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (499 kB)
+#22 26.30    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 499.1/499.1 kB 23.8 MB/s eta 0:00:00
+#22 26.34 Downloading markupsafe-3.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#22 26.37 Downloading pycares-5.2.1-cp311-cp311-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (228 kB)
+#22 26.38    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 228.7/228.7 kB 31.6 MB/s eta 0:00:00
+#22 26.40 Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+#22 26.44 Downloading rich_toolkit-0.20.6-py3-none-any.whl (39 kB)
+#22 26.46 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#22 26.49 Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+#22 26.52 Downloading typer-0.27.3-py3-none-any.whl (123 kB)
+#22 26.53    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 123.3/123.3 kB 10.0 MB/s eta 0:00:00
+#22 26.56 Downloading uvloop-0.23.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.0 MB)
+#22 26.77    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.0/4.0 MB 19.0 MB/s eta 0:00:00
+#22 26.80 Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (458 kB)
+#22 26.85    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 458.4/458.4 kB 10.4 MB/s eta 0:00:00
+#22 26.87 Downloading websockets-17.4-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (226 kB)
+#22 26.88    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.0/226.0 kB 20.3 MB/s eta 0:00:00
+#22 26.90 Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+#22 26.91    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.6/62.6 kB 24.2 MB/s eta 0:00:00
+#22 26.95 Downloading agent_detector-2.0.0-py3-none-any.whl (9.4 kB)
+#22 26.97 Downloading detect_installer-0.2.1-py3-none-any.whl (5.4 kB)
+#22 27.00 Downloading fastar-0.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (812 kB)
+#22 27.07    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 812.8/812.8 kB 12.6 MB/s eta 0:00:00
+#22 27.10 Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+#22 27.15    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 343.2/343.2 kB 7.8 MB/s eta 0:00:00
+#22 27.18 Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+#22 27.20    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 310.7/310.7 kB 17.5 MB/s eta 0:00:00
+#22 27.24 Downloading rignore-0.8.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (932 kB)
+#22 27.28    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 932.6/932.6 kB 22.3 MB/s eta 0:00:00
+#22 27.31 Downloading sentry_sdk-2.73.0-py3-none-any.whl (549 kB)
+#22 27.33    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 549.0/549.0 kB 24.7 MB/s eta 0:00:00
+#22 27.37 Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+#22 27.40 Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+#22 27.40    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.7/91.7 kB 27.1 MB/s eta 0:00:00
+#22 27.43 Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+#22 27.51    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 16.4 MB/s eta 0:00:00
+#22 27.54 Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+#22 27.64 Building wheels for collected packages: openmontage-runpod
+#22 27.64   Building editable for openmontage-runpod (pyproject.toml): started
+#22 28.10   Building editable for openmontage-runpod (pyproject.toml): finished with status 'done'
+#22 28.10   Created wheel for openmontage-runpod: filename=openmontage_runpod-0.1.0-0.editable-py3-none-any.whl size=2885 sha256=88b29d633e66aa0bb5e9a85a4c220549242f430be39b3d6c9fc0bad166766712
+#22 28.10   Stored in directory: /tmp/pip-ephem-wheel-cache-bxu07hvg/wheels/57/0f/98/bb57b2b57b95807699b822a35c022f139d38a02c27922f27ce
+#22 28.10 Successfully built openmontage-runpod
+#22 28.36 Installing collected packages: py-cpuinfo, Brotli, websockets, wcwidth, watchdog, uvloop, urllib3, typing_extensions, truststore, tqdm, tomlkit, tomli, six, shellingham, rignore, pyyaml, python-multipart, python-dotenv, pygments, pycparser, protobuf, propcache, pfzy, multidict, mdurl, MarkupSafe, jmespath, itsdangerous, invoke, idna, httptools, h11, frozenlist, filelock, fastar, dnspython, detect-installer, colorama, click, charset_normalizer, certifi, bcrypt, backports.zstd, backoff, attrs, annotated-types, annotated-doc, aiohappyeyeballs, agent-detector, yarl, uvicorn, typing-inspection, tqdm-loggable, sentry-sdk, requests, python-dateutil, pydantic-core, prompt-toolkit, prettytable, opentelemetry-proto, opentelemetry-api, markdown-it-py, jinja2, httpcore2, httpcore, googleapis-common-protos, email-validator, cffi, anyio, aiosignal, watchfiles, starlette, rich, pynacl, pydantic, pycares, opentelemetry-semantic-conventions, opentelemetry-exporter-otlp-proto-common, opentelemetry-exporter-http-transport, inquirerpy, httpx2, httpx, cryptography, botocore, aiohttp, typer, s3transfer, rich-toolkit, pydantic-settings, pydantic-extra-types, paramiko, opentelemetry-sdk, fastapi, aiohttp-retry, aiodns, opentelemetry-exporter-otlp-common, fastapi-cloud-cli, fastapi-cli, boto3, opentelemetry-exporter-otlp-proto-http, runpod, openmontage-runpod
+#22 36.27 Successfully installed Brotli-1.2.1 MarkupSafe-3.0.4 agent-detector-2.0.0 aiodns-4.0.4 aiohappyeyeballs-2.7.1 aiohttp-3.14.5 aiohttp-retry-2.9.1 aiosignal-1.4.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.16.0 attrs-26.1.0 backoff-2.2.1 backports.zstd-1.8.0 bcrypt-5.0.0 boto3-1.35.99 botocore-1.35.99 certifi-2026.10.23 cffi-2.1.1 charset_normalizer-3.5.2 click-8.5.0 colorama-0.4.6 cryptography-45.0.7 detect-installer-0.2.1 dnspython-2.9.2 email-validator-2.3.0 fastapi-0.162.0 fastapi-cli-0.0.32 fastapi-cloud-cli-0.26.0 fastar-0.12.0 filelock-4.2.9 frozenlist-1.8.0 googleapis-common-protos-1.76.0 h11-0.16.0 httpcore-1.0.9 httpcore2-2.16.0 httptools-0.9.0 httpx-0.28.1 httpx2-2.16.0 idna-3.20 inquirerpy-0.3.4 invoke-3.0.3 itsdangerous-2.2.0 jinja2-3.1.6 jmespath-1.1.0 markdown-it-py-4.2.0 mdurl-0.1.2 multidict-7.2.1 openmontage-runpod-0.1.0 opentelemetry-api-1.45.2 opentelemetry-exporter-http-transport-0.66b2 opentelemetry-exporter-otlp-common-0.66b2 opentelemetry-exporter-otlp-proto-common-1.45.2 opentelemetry-exporter-otlp-proto-http-1.45.2 opentelemetry-proto-1.45.2 opentelemetry-sdk-1.45.2 opentelemetry-semantic-conventions-0.66b2 paramiko-5.1.0 pfzy-0.3.4 prettytable-3.18.0 prompt-toolkit-3.0.53 propcache-0.5.4 protobuf-7.36.2 py-cpuinfo-9.0.0 pycares-5.2.1 pycparser-3.12 pydantic-2.14.2 pydantic-core-2.50.2 pydantic-extra-types-2.11.1 pydantic-settings-2.16.2 pygments-2.21.0 pynacl-1.6.2 python-dateutil-2.9.0.post0 python-dotenv-1.2.4 python-multipart-0.0.33 pyyaml-6.0.3 requests-2.34.2 rich-15.0.0 rich-toolkit-0.20.6 rignore-0.8.1 runpod-1.7.13 s3transfer-0.10.4 sentry-sdk-2.73.0 shellingham-1.5.4 six-1.17.0 starlette-1.10.0 tomli-2.5.0 tomlkit-0.15.2 tqdm-4.70.1 tqdm-loggable-0.4.1 truststore-0.10.5 typer-0.27.3 typing-inspection-0.4.5 typing_extensions-4.16.0 urllib3-2.8.0 uvicorn-0.54.0 uvloop-0.23.0 watchdog-7.0.0 watchfiles-1.3.0 wcwidth-0.9.4 websockets-17.4 yarl-1.25.1
+#22 36.27 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#22 36.41 
+#22 36.41 [notice] A new release of pip is available: 24.0 -> 26.3
+#22 36.41 [notice] To update, run: pip install --upgrade pip
+#22 DONE 39.4s
+
+#23 [runtime 8/9] COPY scripts ./scripts
+#23 DONE 0.1s
+
+#24 [runtime 9/9] COPY tests ./tests
+#24 DONE 0.1s
+
+#25 exporting to image
+#25 exporting layers
+#25 exporting layers 5.3s done
+#25 exporting manifest sha256:2ccc944f335494ba0f7ddfeb0d36bf48abcbfc9943e862536cd359862b3c8432 0.0s done
+#25 exporting config sha256:16d7cd4ae2c4ab2bff6f3c7608fa8df0f6004868767644072532a51ce28fa275 0.0s done
+#25 exporting attestation manifest sha256:fb659c66c3364ef6dd073ef0036c7cedad4ff8f6cef78b2c77a47a4738bf3c7c
+#25 exporting attestation manifest sha256:fb659c66c3364ef6dd073ef0036c7cedad4ff8f6cef78b2c77a47a4738bf3c7c 0.0s done
+#25 exporting manifest list sha256:f33bf954aaa6859bbbd7ce82dccd013f307029361a1619dc4b58f24180ad2c20 0.0s done
+#25 naming to docker.io/library/openmontage-worker:local done
+#25 unpacking to docker.io/library/openmontage-worker:local
+#25 unpacking to docker.io/library/openmontage-worker:local 1.8s done
+#25 DONE 7.4s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/qgs2qsopuh4egw13vvwcz50d5

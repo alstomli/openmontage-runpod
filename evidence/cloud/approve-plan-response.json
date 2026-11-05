@@ -1,0 +1,23 @@
+{
+  "delayTime": 4040,
+  "executionTime": 213,
+  "id": "ffb87b44-a475-42ea-ac40-dd2dca08755e-u1",
+  "output": {
+    "approval_stage": "plan",
+    "artifact_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+    "artifacts": [
+      {
+        "bytes": 115,
+        "key": "projects/narrated-validation/approvals/plan/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json",
+        "local_path": "/runpod-volume/openmontage/projects/narrated-validation/approvals/plan/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json",
+        "sha256": "e5c87b859183c014d64c8db6496d76a6649eb5166f7f21e972c83dba34028366"
+      }
+    ],
+    "cached": false,
+    "operation": "approve",
+    "project_id": "narrated-validation",
+    "status": "approved"
+  },
+  "status": "COMPLETED",
+  "workerId": "ap64a5w4royb1u"
+}

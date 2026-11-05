@@ -1,0 +1,32 @@
+{
+  "delayTime": 56462,
+  "executionTime": 206,
+  "id": "a426eee3-aaeb-4589-b031-775ccfcd9a49-u1",
+  "output": {
+    "approval_stage": "plan",
+    "artifact_hash": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee",
+    "artifacts": [
+      {
+        "bytes": 1736,
+        "key": "projects/narrated-validation/plans/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json",
+        "local_path": "/runpod-volume/openmontage/projects/narrated-validation/plans/669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee.json",
+        "sha256": "669104c7ee1b85823ec7afc85781741da6592216af138d71774db61fc1cb36ee"
+      }
+    ],
+    "cached": false,
+    "capabilities": {
+      "composition_mode": "templated",
+      "image_generation": false,
+      "plain_script_planning": false,
+      "render_runtime": "remotion",
+      "supplied_assets": true,
+      "tts_generation": false
+    },
+    "duration": 30,
+    "operation": "prepare",
+    "project_id": "narrated-validation",
+    "status": "awaiting_approval"
+  },
+  "status": "COMPLETED",
+  "workerId": "64drlvc6ms55j7"
+}

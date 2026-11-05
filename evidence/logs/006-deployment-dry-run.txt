@@ -1,0 +1,10 @@
+Deployment preparation:PASS(dry-run only)
+Scripts/prepare_deployment.py supports genericS3 OR existing mounted network volume.
+Mounted example uses networkVolumeId=l34ba8wnno, datacenterEU-RO-1, STORAGE_BACKEND=local, LOCAL_STORAGE_ROOT=/runpod-volume/openmontage, REQUIRE_NETWORK_VOLUME=1.
+Existing sibling LLM/model files are preserved. No deletion is needed.
+File:evidence/logs/network-volume-plan.json. Image digest and CPUflavor there are placeholders; storageID/region came from root console inspection.
+GenericS3 example remains evidence/logs/deployment-dry-run.json(all resource values are dummy examples).
+Neither script makes network calls or creates resources. Presigned downloads are NOT supported by RunpodS3 API, so genericS3 mode rejects RunpodS3 endpoint URLs.
+Official API schema includes networkVolumeId for common CPU/GPU endpoint request; actual CPU attachment/scheduling availability inEU-RO-1 is pending account/UI confirmation.
+Mounted outputs are worker filesystem paths; transfer requires authenticated volume tools or RunpodS3 API.
+Default active0/max1/concurrency1,20minute execution. Direct GitHub source deployment can build without submodule recursion; checksum-pinned upstream archive is fetched during Docker build.

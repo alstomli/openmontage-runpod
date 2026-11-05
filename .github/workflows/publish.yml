@@ -1,0 +1,43 @@
+name: Publish verified image manually
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: release
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - run: python scripts/verify_upstream.py
+      - name: Build candidate
+        run: |
+          IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}:sha-$GITHUB_SHA"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+          docker build --platform linux/amd64 -t "$IMAGE" .
+      - name: Verify candidate
+        run: |
+          docker run --rm --entrypoint python "$IMAGE" -m unittest discover -s tests/unit -v
+          docker run --rm --entrypoint python "$IMAGE" -m unittest discover -s tests/reliability -v
+          mkdir -p evidence/release
+          docker run --rm --network none --shm-size=1g -v "$PWD/evidence/release:/evidence" --entrypoint python "$IMAGE" scripts/client.py smoke --output /evidence
+          if docker run --rm --network none -e REQUIRE_NETWORK_VOLUME=1 --entrypoint python "$IMAGE" scripts/start_worker.py --check-only; then
+            echo "Required missing volume was incorrectly accepted"
+            exit 1
+          fi
+      - name: Publish the tested image
+        env:
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$REGISTRY_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker push "$IMAGE"
+          docker inspect --format '{{index .RepoDigests 0}}' "$IMAGE" > evidence/release/image-digest.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-evidence
+          path: evidence/release

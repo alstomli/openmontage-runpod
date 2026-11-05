@@ -1,0 +1,63 @@
+{
+  "endpoint_id": "aocbogtvk098ds",
+  "name": "openmontage-staging",
+  "console_url": "https://console.runpod.io/serverless/user/endpoint/aocbogtvk098ds",
+  "source_repository": "https://github.com/alstomli/openmontage-runpod",
+  "branch": "feat/runpod-worker",
+  "build_commit": "5a69307939f0ea259d23904ae50c202ba34635a7",
+  "status": "supplied_asset_staging_verified",
+  "compute": {
+    "type": "CPU",
+    "vcpus": 4,
+    "memory_gb": 16,
+    "clock_ghz": 5
+  },
+  "workers": {
+    "active": 0,
+    "maximum": 1
+  },
+  "execution_timeout_seconds": 1200,
+  "idle_timeout_seconds": 5,
+  "container_disk_gb": 20,
+  "network_volume_id": "l34ba8wnno",
+  "data_center": "EU-RO-1",
+  "environment": {
+    "STORAGE_BACKEND": "local",
+    "LOCAL_STORAGE_ROOT": "/runpod-volume/openmontage",
+    "REQUIRE_NETWORK_VOLUME": "1"
+  },
+  "existing_volume_files_deleted": false,
+  "verified_video": {
+    "wrapper_version": "0.1.1",
+    "build_commit": "95f5ecdf99e8daccf0225c45e9c6c771b979503a",
+    "job_id": "1cdc79ce-3fbb-4458-b71c-3e66d4ba3852-u1",
+    "bytes": 1829646,
+    "sha256": "74dcd3ea89dad436dfb14ad5d9562d5a964a0eec149ec68896dd7c9a42e3b29d",
+    "execution_ms": 138890,
+    "delay_ms": 4285,
+    "download_verified": true
+  },
+  "wrapper_version": "0.1.2",
+  "provenance_note": "Live validation used this runtime commit. Later documentation/evidence commits on the connected branch may rebuild the same behavior; video provenance is recorded separately.",
+  "verified_error_transport": {
+    "job_id": "f05f1304-0659-4c49-82a3-1fece3f50b1d-u2",
+    "provider_status": "FAILED",
+    "error_code": "invalid_input",
+    "safe_json_string": true,
+    "execution_ms": 235,
+    "delay_ms": 4806
+  },
+  "verified_success_after_fix": {
+    "job_id": "a426eee3-aaeb-4589-b031-775ccfcd9a49-u1",
+    "provider_status": "COMPLETED",
+    "output_status": "awaiting_approval",
+    "cached": false,
+    "execution_ms": 206,
+    "delay_ms": 56462
+  },
+  "final_observed_queue": {
+    "running_workers": 0,
+    "in_progress": 0,
+    "waiting": 0
+  }
+}

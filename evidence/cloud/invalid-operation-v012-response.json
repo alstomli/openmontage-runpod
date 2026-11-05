@@ -1,0 +1,11 @@
+{
+  "delayTime": 4806,
+  "error": "{\"code\": \"invalid_input\", \"message\": \"Unknown operation.\"}",
+  "executionTime": 235,
+  "id": "f05f1304-0659-4c49-82a3-1fece3f50b1d-u2",
+  "output": {
+    "status": "failed"
+  },
+  "status": "FAILED",
+  "workerId": "r96k623chzgpya"
+}

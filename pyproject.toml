@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools==75.8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openmontage-runpod"
+version = "0.1.2"
+description = "Approved supplied-asset OpenMontage jobs for Runpod Serverless"
+requires-python = ">=3.11"
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+include = ["openmontage_worker*"]

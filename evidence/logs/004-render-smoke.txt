@@ -1,0 +1,13 @@
+Final packaged-image render: PASS (application0.1.1, uncached)
+Command: docker run --rm --network none --shm-size=1g -v D:/OpenMontage/evidence:/evidence --entrypoint python openmontage-worker:local scripts/client.py smoke --output /evidence/render-archive-final
+ImageID:sha256:b8b0ca6c2f32910db67eda0232d9a262264760836728e2551bf19ae82b540806
+Fresh storage/output directory; no source/scripts/test mounts; only evidence mount.
+Stages:prepare -> plan approval -> supplied assets -> asset approval -> compose.
+Compose elapsed40.618seconds, cached=false.
+Output:render-archive-final/storage/projects/smoke-test/renders/45482a59d9a4823c5707ceb764936df2218f0a554fd4123463b3c4703367e573/final.mp4
+MP4bytes362842; SHA256:0f0c444629d47bece3c83e5f43bd69cfa782d76aef7ba5339437b319e506a29a
+Metadata:H2641280x720 at30fps, AACaudio, duration4.054seconds.
+Captions are FFmpeg/libass burned with wrapping; thumbnail visually inspected, caption fully inside frame.
+Fixture audio synthetic test tone, not speech; no TTS-backend claim.
+Full log:container-archive-final-smoke.log; metadata:render-archive-metadata.json.
+Local Docker proof only; actual Runpod mount and account compute compatibility still need cloud verification.

@@ -1,0 +1,38 @@
+INFO   | sdk-report-contract | Started.
+DEBUG  | sdk-report-contract | Handler output: {'status': 'failed', 'error': {'code': 'invalid_input', 'message': 'Unknown operation.'}}
+DEBUG  | sdk-report-contract | run_job return: {'output': {'status': 'failed'}, 'error': {'code': 'invalid_input', 'message': 'Unknown operation.'}}
+DEBUG  | sdk-report-contract | rp_debugger | Flag not set, skipping debugger output.
+test_failure_string_survives_complete_sdk_reporting_serialization (test_recovery.RunpodSDKTests.test_failure_string_survives_complete_sdk_reporting_serialization) ... runner.py           :19   2026-11-05 04:29:47,983 {"code": "invalid_input", "event": "stage_failed"}
+DEBUG  | sdk-report-contract | Results sent.
+INFO   | sdk-report-contract | Finished.
+FAIL
+INFO   | sdk-failure-contract | Started.
+DEBUG  | sdk-failure-contract | Handler output: {'status': 'failed', 'error': {'code': 'invalid_input', 'message': 'Unknown operation.'}}
+DEBUG  | sdk-failure-contract | run_job return: {'output': {'status': 'failed'}, 'error': {'code': 'invalid_input', 'message': 'Unknown operation.'}}
+test_handler_failure_reaches_sdk_error_channel (test_recovery.RunpodSDKTests.test_handler_failure_reaches_sdk_error_channel) ... runner.py           :19   2026-11-05 04:29:48,017 {"code": "invalid_input", "event": "stage_failed"}
+FAIL
+INFO   | sdk-success-contract | Started.
+DEBUG  | sdk-success-contract | Handler output: {'status': 'awaiting_approval', 'artifact_hash': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+DEBUG  | sdk-success-contract | run_job return: {'output': {'status': 'awaiting_approval', 'artifact_hash': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}
+test_sdk_preserves_success_and_ignores_provider_metadata (test_recovery.RunpodSDKTests.test_sdk_preserves_success_and_ignores_provider_metadata) ... ok
+
+======================================================================
+FAIL: test_failure_string_survives_complete_sdk_reporting_serialization (test_recovery.RunpodSDKTests.test_failure_string_survives_complete_sdk_reporting_serialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/tests/reliability/test_recovery.py", line 240, in test_failure_string_survives_complete_sdk_reporting_serialization
+    self.assertIsInstance(wire["error"], str)
+AssertionError: {'code': 'invalid_input', 'message': 'Unknown operation.'} is not an instance of <class 'str'>
+
+======================================================================
+FAIL: test_handler_failure_reaches_sdk_error_channel (test_recovery.RunpodSDKTests.test_handler_failure_reaches_sdk_error_channel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/tests/reliability/test_recovery.py", line 220, in test_handler_failure_reaches_sdk_error_channel
+    self.assertIsInstance(result["error"], str)
+AssertionError: {'code': 'invalid_input', 'message': 'Unknown operation.'} is not an instance of <class 'str'>
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.694s
+
+FAILED (failures=2)

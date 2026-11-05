@@ -1,0 +1,25 @@
+{
+  "result": "media_completed_visual_review_required",
+  "sha256": "e32bd13e7fa0a2aa4a1e5ba52d1f1c2429b726d5b9d49392b7138ea01f18d611",
+  "bytes": 1835627,
+  "compose_seconds": 259.977,
+  "duration_seconds": "30.059000",
+  "streams": [
+    {
+      "codec_type": "video",
+      "codec_name": "h264",
+      "width": 1280,
+      "height": 720,
+      "r_frame_rate": "30/1"
+    },
+    {
+      "codec_type": "audio",
+      "codec_name": "aac",
+      "width": null,
+      "height": null,
+      "r_frame_rate": "0/0"
+    }
+  ],
+  "provenance": "0.1.1 application mounted into an existing full media image; independent final archive image separately passes packaged tests and offline render",
+  "fixture": "Offline Windows Zira supplied speech, manually timed phrase captions; not a worker TTS backend or forced alignment benchmark"
+}
