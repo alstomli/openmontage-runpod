@@ -26,6 +26,12 @@ jobs:
         run: |
           mkdir -p evidence/ci
           docker run --rm --network none --shm-size=1g -v "$PWD/evidence/ci:/evidence" --entrypoint python openmontage-worker:ci scripts/client.py smoke --output /evidence
+      - name: Missing persistent volume fails closed
+        run: |
+          if docker run --rm --network none -e REQUIRE_NETWORK_VOLUME=1 --entrypoint python openmontage-worker:ci scripts/start_worker.py --check-only; then
+            echo "Required missing volume was incorrectly accepted"
+            exit 1
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:

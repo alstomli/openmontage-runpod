@@ -241,5 +241,33 @@ class WorkerTests(unittest.TestCase):
         self.assertTrue(any(a.get("kind") == "manifest" for a in again["artifacts"]))
 
 
+class HandlerAdapterTests(unittest.TestCase):
+    def test_runpod_error_is_a_string_without_mutating_local_error_contract(self):
+        from handler import handler
+        local_result = {"status": "failed", "error": {"code": "invalid_input", "message": "Unknown operation."}}
+        with patch("handler.execute", return_value=local_result):
+            remote_result = handler({"input": {"operation": "unsupported"}})
+        self.assertIsInstance(remote_result["error"], str)
+        self.assertEqual(json.loads(remote_result["error"]), local_result["error"])
+        self.assertIsInstance(local_result["error"], dict)
+
+    def test_runpod_internal_error_does_not_expose_original_exception(self):
+        from handler import handler
+        with patch("openmontage_worker.runner.Runner", side_effect=RuntimeError("private-token-must-not-leak")):
+            result = handler({"input": {"operation": "prepare"}})
+        self.assertIsInstance(result["error"], str)
+        self.assertEqual(json.loads(result["error"])["code"], "internal_error")
+        self.assertNotIn("private-token", result["error"])
+        self.assertNotIn("traceback", result["error"].lower())
+
+    def test_success_is_preserved_and_provider_metadata_is_ignored(self):
+        from handler import handler
+        expected = {"status": "awaiting_approval", "artifact_hash": "a" * 64}
+        with patch("handler.execute", return_value=expected) as execute_mock:
+            result = handler({"id": "provider-job", "input": {"operation": "prepare"}, "policy": {"ttl": 123}})
+        self.assertEqual(result, expected)
+        execute_mock.assert_called_once_with({"input": {"operation": "prepare"}})
+
+
 if __name__ == "__main__":
     unittest.main()

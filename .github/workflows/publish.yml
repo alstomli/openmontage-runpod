@@ -25,6 +25,10 @@ jobs:
           docker run --rm --entrypoint python "$IMAGE" -m unittest discover -s tests/reliability -v
           mkdir -p evidence/release
           docker run --rm --network none --shm-size=1g -v "$PWD/evidence/release:/evidence" --entrypoint python "$IMAGE" scripts/client.py smoke --output /evidence
+          if docker run --rm --network none -e REQUIRE_NETWORK_VOLUME=1 --entrypoint python "$IMAGE" scripts/start_worker.py --check-only; then
+            echo "Required missing volume was incorrectly accepted"
+            exit 1
+          fi
       - name: Publish the tested image
         env:
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}

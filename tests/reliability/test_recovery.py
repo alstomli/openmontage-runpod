@@ -9,11 +9,12 @@ import asyncio
 from hashlib import sha256
 import importlib.util
 import io
+import json
 import os
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import AsyncMock, Mock, patch
 
 from openmontage_worker.errors import WorkerError
 from openmontage_worker.runner import Runner, execute
@@ -212,10 +213,35 @@ class RunpodSDKTests(unittest.TestCase):
         from runpod.serverless.modules.rp_job import run_job
         with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
             with patch.dict(os.environ, {"STORAGE_BACKEND": "local", "LOCAL_STORAGE_ROOT": str(Path(directory) / "store"), "WORK_ROOT": str(Path(directory) / "scratch")}):
-                result = asyncio.run(run_job(handler, {"id": "sdk-failure-contract", "input": {"operation": "not-supported"}}))
+                result = asyncio.run(run_job(handler, {"id": "sdk-failure-contract", "input": {"operation": "not-supported", "project_id": "sdk-check", "idempotency_key": "negative"}}))
         self.assertIn("error", result)
-        self.assertEqual("invalid_input", result["error"]["code"])
-        self.assertNotIn("error_traceback", result["error"])
+        # A dict here passed our earlier SDK-only assertion but the live service
+        # discarded it and marked the job COMPLETED. Wire error must be a string.
+        self.assertIsInstance(result["error"], str)
+        error = json.loads(result["error"])
+        self.assertEqual("invalid_input", error["code"])
+        self.assertEqual({"code", "message"}, set(error))
+
+    def test_failure_string_survives_complete_sdk_reporting_serialization(self):
+        from handler import handler
+        from runpod.serverless.modules import rp_http, rp_job
+        session = Mock()
+        session.headers = {}
+        job = {"id": "sdk-report-contract", "input": {"operation": "not-supported", "project_id": "sdk-check", "idempotency_key": "negative"}}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            with patch.dict(os.environ, {"STORAGE_BACKEND": "local", "LOCAL_STORAGE_ROOT": str(Path(directory) / "store"), "WORK_ROOT": str(Path(directory) / "scratch")}):
+                # Capture at the actual SDK network boundary; no cloud request.
+                with patch.object(rp_http, "JOB_DONE_URL", "https://worker.invalid/$ID"), patch.object(rp_http, "_transmit", new_callable=AsyncMock) as transmit:
+                    asyncio.run(rp_job.handle_job(session, {"handler": handler}, job))
+        transmit.assert_awaited_once()
+        args = transmit.await_args.args
+        self.assertEqual("https://worker.invalid/sdk-report-contract&isStream=false", args[1])
+        wire = json.loads(args[2])
+        self.assertIsInstance(wire["error"], str)
+        error = json.loads(wire["error"])
+        self.assertEqual("invalid_input", error["code"])
+        self.assertEqual({"code", "message"}, set(error))
+        self.assertNotIn("error_traceback", wire["error"])
 
     def test_sdk_preserves_success_and_ignores_provider_metadata(self):
         from handler import handler
